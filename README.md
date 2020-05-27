@@ -8,8 +8,12 @@ A dependency free script that let elements follow your cursor without a huge ove
 leave it empty, it is set to 10.
 
 ## Include Script
+### local via npm
+1. `npm i follow-js`
+2. `<script src"node_modules/follow-js/dist/follow.min.js"></script>`
+
 ### unpkg
-`<script src="https://unpkg.com/follow-js@1.0.0/dist/follow.min.js">`
+1. `<script src="https://unpkg.com/follow-js@1.0.0/dist/follow.min.js"></script>`
 
 ## Options
 ### Dynamically add new elements
@@ -28,7 +32,7 @@ Currently, the script only works on `position: absolute` elements.
 In the current state, the script wont work properly with a transition on the element. 
 
 ## Examples
-Have a look in the examples folder to see some magic. 
+Have a look in the `examples` folder to see some magic. 
 
 ## Contribute
 Feel free to open a Pullrequest or create a Issue on this project.
