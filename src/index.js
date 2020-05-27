@@ -9,11 +9,17 @@ window.follow = {
 }
 
 follow.init = () => {
+  // get all targets with attribute
   let targets = document.querySelectorAll(`[${follow.attribute}]`)
 
+  // debug
+  follow.log('targets', targets)
+
   for (let target of targets) {
+    // set the specified or the default factor
     let factor = target.getAttribute(follow.attribute) ? target.getAttribute(follow.attribute) : follow.defaultFactor
 
+    // create element object
     let element = {
       factor: factor,
       target: target,
@@ -25,18 +31,26 @@ follow.init = () => {
       }
     }
 
+    // define start position of element to calculate correctly
     element.startPosition.x = element.target.offsetLeft
     element.startPosition.y = element.target.offsetTop
 
+    // push element to array
     follow.elements.push(element)
   }
 
-  document.addEventListener('mousemove', follow.animate)
+  // debug
+  follow.log('elements', follow.elements)
 }
 
 follow.animate = (event) => {
+  // define mouse position
   let mouseX = event.clientX
   let mouseY = event.clientY
+
+  // debug
+  follow.log('mouseX', mouseX)
+  follow.log('mouseY', mouseY)
 
   for (let element of follow.elements) {
     // debug
@@ -46,7 +60,7 @@ follow.animate = (event) => {
     element.x = element.target.offsetLeft
     element.y = element.target.offsetTop
 
-    // define future position
+    // calculate future position
     let positionX = (mouseX - element.x) / element.factor
     let positionY = (mouseY - element.y) / element.factor
 
@@ -71,3 +85,4 @@ follow.log = (string, object = undefined) => {
 }
 
 follow.init()
+document.addEventListener('mousemove', follow.animate)
