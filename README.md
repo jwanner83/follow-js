@@ -13,7 +13,7 @@ leave it empty, it is set to 10.
 2. `<script src"node_modules/follow-js/dist/follow.min.js"></script>`
 
 ### unpkg
-1. `<script src="https://unpkg.com/follow-js@1.0.0/dist/follow.min.js"></script>`
+1. `<script src="https://unpkg.com/follow-js@1.0.2/dist/follow.min.js"></script>`
 
 ## Options
 ### Dynamically add new elements
