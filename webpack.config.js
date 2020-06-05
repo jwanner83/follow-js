@@ -7,4 +7,5 @@ module.exports = {
     filename: 'follow.min.js'
   },
   mode: 'production',
+  watch: true
 }
