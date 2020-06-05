@@ -1,5 +1,8 @@
+import * as helper from './helper'
+
 window.follow = {
-  debug: false,
+  debug: true,
+  centerHelper: true,
   elements: [],
   attribute: 'data-follow',
   defaultFactor: 10,
@@ -25,15 +28,26 @@ follow.init = () => {
       target: target,
       x: 0,
       y: 0,
-      startPosition: {
+      dimensions: {
+        height: 0,
+        width: 0
+      },
+      initialPosition: {
         x: 0,
         y: 0
-      }
+      },
     }
 
-    // define start position of element to calculate correctly
-    element.startPosition.x = element.target.offsetLeft
-    element.startPosition.y = element.target.offsetTop
+    // define dimensions of the element
+    element.dimensions.height = element.target.offsetHeight
+    element.dimensions.width = element.target.offsetWidth
+
+    // define the center of the element as initial position
+    element.initialPosition.x = element.target.offsetLeft + (element.dimensions.width / 2)
+    element.initialPosition.y = element.target.offsetTop + (element.dimensions.height / 2)
+
+    // if center helper is wanted
+    follow.centerHelper && helper.dot(element.initialPosition.x, element.initialPosition.y)
 
     // push element to array
     follow.elements.push(element)
@@ -69,8 +83,8 @@ follow.animate = (event) => {
     follow.log('future position y', positionY)
 
     // set future position
-    element.target.style.left = element.startPosition.x + positionX + 'px'
-    element.target.style.top = element.startPosition.y + positionY + 'px'
+    element.target.style.left = element.initialPosition.x + positionX + 'px'
+    element.target.style.top = element.initialPosition.y + positionY + 'px'
   }
 }
 
