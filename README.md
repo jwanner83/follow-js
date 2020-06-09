@@ -3,7 +3,7 @@ A experimental, dependency free script that let elements follow your cursor with
 
 ## Usage
 1. Include the `follow.min.js` script to your project
-2. Add the `data-follow` attribute to the `position: absolute` elements which you want to follow the cursor
+2. Add the `data-follow` attribute to elements which you want to follow the cursor
 3. Set the factor on how big they should follow like so `data-follow="100"` (higher equals less movement, if you 
 leave it empty, it is set to 10.
 
@@ -13,7 +13,7 @@ leave it empty, it is set to 10.
 2. `<script src"node_modules/follow-js/dist/follow.min.js"></script>`
 
 ### unpkg
-1. `<script src="https://unpkg.com/follow-js@1.1.1/dist/follow.min.js"></script>`
+1. `<script src="https://unpkg.com/follow-js@1.1.2/dist/follow.min.js"></script>`
 
 ## Options
 ### Dynamically add new elements
@@ -28,9 +28,6 @@ stay at the exact position on the page as before but will correctly follow the c
 if you would like to have a special styling for those.
 
 ## Restriction
-### position absolute
-Currently, the script only works on `position: absolute` elements.
-
 ### transition
 In the current state, the script won't work properly with a transition on the element. 
 
