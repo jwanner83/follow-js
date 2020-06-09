@@ -71,6 +71,10 @@ follow.init = () => {
                 // give to the new element position absolute
                 absoluteElement.style.position = 'absolute'
 
+                // add the correct dimensions to the element
+                absoluteElement.style.height = element.dimensions.height + 'px'
+                absoluteElement.style.width = element.dimensions.width + 'px'
+
                 // position element to exact spot
                 absoluteElement.style.left = element.initialPosition.x - (element.dimensions.width / 2) + 'px'
                 absoluteElement.style.top = element.initialPosition.y - (element.dimensions.height / 2) + 'px'
