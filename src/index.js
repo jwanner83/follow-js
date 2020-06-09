@@ -1,3 +1,4 @@
+import * as helper from './helper'
 import * as debug from './debug'
 
 window.follow = {
@@ -28,6 +29,7 @@ follow.init = () => {
         let element = {
             factor: factor,
             target: target,
+            before: undefined,
             x: 0,
             y: 0,
             dimensions: {
@@ -57,39 +59,24 @@ follow.init = () => {
         // if center helper is wanted
         debug.dot(element.initialPosition.x, element.initialPosition.y, 'red', 10000)
 
-        // if container has position relative, remove element and add back on top of all
-        let parent = element.target.parentElement
+        // if position isn't absolute clone element
+        if (getComputedStyle(element.target).position !== 'absolute') {
+            helper.clone(element)
+        } else {
+            // if container has position relative, remove element and add back on top of all
+            let parent = element.target.parentElement
 
-        while (true) {
-            if (parent.tagName === 'BODY') {
-                break
+            while (true) {
+                // if parent is body break out of while
+                if (parent.tagName === 'BODY') {
+                    break
+                    // else if position is relative
+                } else if (getComputedStyle(parent).position === 'relative') {
+                    helper.clone(element)
+                    break
+                }
+                parent = parent.parentElement
             }
-            if (getComputedStyle(parent).position === 'relative') {
-                // clone element
-                let absoluteElement = element.target.cloneNode(true)
-
-                // give to the new element position absolute
-                absoluteElement.style.position = 'absolute'
-
-                // add the correct dimensions to the element
-                absoluteElement.style.height = element.dimensions.height + 'px'
-                absoluteElement.style.width = element.dimensions.width + 'px'
-
-                // position element to exact spot
-                absoluteElement.style.left = element.initialPosition.x - (element.dimensions.width / 2) + 'px'
-                absoluteElement.style.top = element.initialPosition.y - (element.dimensions.height / 2) + 'px'
-
-                // append absolute element to the body
-                document.body.append(absoluteElement)
-
-                // hide old element but not remove it to keep the space
-                element.target.style.opacity = '0'
-
-                // add new element as new target
-                element.target = absoluteElement
-                break
-            }
-            parent = parent.parentElement
         }
 
         // push element to array
@@ -110,10 +97,16 @@ follow.destroy = () => {
     // remove the event listener
     document.removeEventListener('mousemove', follow.animate)
 
-    // set the initial position for all elements
     for (const element of follow.elements) {
-        element.target.style.left = element.initialPosition.x - (element.dimensions.width / 2) + 'px'
-        element.target.style.top = element.initialPosition.y - (element.dimensions.height / 2) + 'px'
+        if (element.before) {
+            // if before element exists, bring it back and remove absolute element
+            element.before.style.opacity = '1'
+            element.target.remove()
+        } else {
+            // set the initial position for all elements
+            element.target.style.left = element.initialPosition.x - (element.dimensions.width / 2) + 'px'
+            element.target.style.top = element.initialPosition.y - (element.dimensions.height / 2) + 'px'
+        }
     }
 
     // log
