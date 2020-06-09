@@ -82,8 +82,8 @@ follow.init = () => {
                 // append absolute element to the body
                 document.body.append(absoluteElement)
 
-                // remove old element
-                element.target.remove()
+                // hide old element but not remove it to keep the space
+                element.target.style.opacity = '0'
 
                 // add new element as new target
                 element.target = absoluteElement
