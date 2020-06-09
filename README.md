@@ -1,5 +1,5 @@
 # follow-js
-A dependency free script that let elements follow your cursor without a huge overhead.
+A experimental, dependency free script that let elements follow your cursor without a huge overhead.
 
 ## Usage
 1. Include the `follow.min.js` script to your project
@@ -13,7 +13,7 @@ leave it empty, it is set to 10.
 2. `<script src"node_modules/follow-js/dist/follow.min.js"></script>`
 
 ### unpkg
-1. `<script src="https://unpkg.com/follow-js@1.1.0/dist/follow.min.js"></script>`
+1. `<script src="https://unpkg.com/follow-js@1.1.1/dist/follow.min.js"></script>`
 
 ## Options
 ### Dynamically add new elements
@@ -23,7 +23,7 @@ elements to its initial position. Then add the new element and fire `follow.init
 ## Special behaviours
 ### position relative container
 If you have an element which is inside an `position: relative` container (as you can see in the examples in 
-`relative-container.html`) the element will be removed from the inside of the container and moved to the body. It will 
+`relative-container.html`) the element will be hidden from the inside of the container and copied to the body. It will 
 stay at the exact position on the page as before but will correctly follow the cursor. This might generate some problems 
 if you would like to have a special styling for those.
 
