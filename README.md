@@ -1,5 +1,5 @@
 # follow-js
-A experimental, dependency free script that let elements follow your cursor without a huge overhead.
+An experimental, dependency free script that let elements follow your cursor without a huge overhead.
 
 ## Usage
 1. Include the `follow.min.js` script to your project
@@ -13,24 +13,18 @@ leave it empty, it is set to 10.
 2. `<script src"node_modules/follow-js/dist/follow.min.js"></script>`
 
 ### unpkg
-1. `<script src="https://unpkg.com/follow-js@1.1.2/dist/follow.min.js"></script>`
+1. `<script src="https://unpkg.com/follow-js@2.0.0/dist/follow.min.js"></script>`
 
 ## Options
 ### Dynamically add new elements
 If you want to add a new element with the follow animation, fire the `follow.destroy()` method, which resets all the 
 elements to its initial position. Then add the new element and fire `follow.init()` to re initialize the script. 
 
-## Special behaviours
-### position relative container
-If you have an element which is inside an `position: relative` container (as you can see in the examples in 
-`relative-container.html`) the element will be hidden from the inside of the container and copied to the body. It will 
-stay at the exact position on the page as before but will correctly follow the cursor. This might generate some problems 
-if you would like to have a special styling for those.
+### Destroy
+If you want to destroy the follow animations, use the `follow.destroy()` method. As parameter, you can set the duration 
+of the animation which sets the elements back to their initial position. Default is `300`
 
 ## Restriction
-### transition
-In the current state, the script won't work properly with a transition on the element. 
-
 ### transform: translate(-50%, -50%)
 The transform property won't currently work because this one calculates the element completely different from we the way 
 we do which would require a complete rewrite of the script.
