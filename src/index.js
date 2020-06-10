@@ -55,26 +55,29 @@ follow.init = () => {
 }
 
 follow.destroy = (duration = 300) => {
-    // log
     debug.log('follow.destroy() called')
 
     // remove the event listener
     document.removeEventListener('mousemove', follow.animate)
 
     for (const element of follow.elements) {
+        // get transition behaviour from element
         let transitionBefore = getComputedStyle(element.target).transition
 
+        // if duration is higher than 0 do transition
         if (duration > 0) {
             element.target.style.transition = duration + 'ms'
 
+            // reset transition after animation is done
             setTimeout(() => {
                 element.target.style.transition = transitionBefore
             }, duration + 10)
         }
+
+        // set transform back to normal
         element.target.style.transform = ''
     }
 
-    // log
     debug.log('follow.destroy() finished')
 }
 
@@ -82,12 +85,6 @@ follow.animate = (event) => {
     // define mouse position
     let mouseX = event.clientX
     let mouseY = event.clientY
-
-    // firefox fallback because mouse is offset by y 15 and x 9 pixel
-    /*if (navigator.userAgent.search("Firefox") !== -1) {
-        mouseX += 9
-        mouseY += 15
-    }*/
 
     // add debug dot to the mouse position
     debug.dot(mouseX, mouseY, 'blue')
