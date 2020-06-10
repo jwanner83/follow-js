@@ -12,7 +12,8 @@
     "js-animation",
     "css-animation",
     "ui",
-    "design"
+    "design",
+    "frontend"
   ],
   "author": "Jonas Wanner",
   "license": "ISC",
