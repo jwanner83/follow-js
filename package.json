@@ -26,6 +26,6 @@
     "webpack-cli": "^3.3.11"
   },
   "scripts": {
-    "build": "webpack"
+    "watch": "webpack"
   }
 }

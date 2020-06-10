@@ -54,7 +54,7 @@ follow.init = () => {
     debug.log('elements', follow.elements)
 }
 
-follow.destroy = () => {
+follow.destroy = (duration = 300) => {
     // log
     debug.log('follow.destroy() called')
 
@@ -62,7 +62,16 @@ follow.destroy = () => {
     document.removeEventListener('mousemove', follow.animate)
 
     for (const element of follow.elements) {
-        // things
+        let transitionBefore = getComputedStyle(element.target).transition
+
+        if (duration > 0) {
+            element.target.style.transition = duration + 'ms'
+
+            setTimeout(() => {
+                element.target.style.transition = transitionBefore
+            }, duration + 10)
+        }
+        element.target.style.transform = ''
     }
 
     // log
