@@ -11,7 +11,8 @@ window.follow = {
     defaultFactor: 10,
     init: undefined,
     destroy: undefined,
-    animate: undefined
+    animate: undefined,
+    locked: false
 }
 
 follow.init = () => {
@@ -28,6 +29,7 @@ follow.init = () => {
         let element = {
             target: target,
             factor: factor,
+            firstTransform: true,
             position: {
                 x: 0,
                 y: 0
@@ -48,40 +50,26 @@ follow.init = () => {
         follow.elements.push(element)
     }
 
-    // activate event listener
-    document.addEventListener('mousemove', follow.animate)
+    // activate event listeners
+    helper.activateListeners()
 
     debug.log('elements', follow.elements)
 }
 
 follow.destroy = (duration = 300) => {
-    debug.log('follow.destroy() called')
+    // remove the event listeners
+    helper.destroyListeners()
 
-    // remove the event listener
-    document.removeEventListener('mousemove', follow.animate)
+    // transit elements to initial position
+    helper.transitToInit()
 
-    for (const element of follow.elements) {
-        // get transition behaviour from element
-        let transitionBefore = getComputedStyle(element.target).transition
-
-        // if duration is higher than 0 do transition
-        if (duration > 0) {
-            element.target.style.transition = duration + 'ms'
-
-            // reset transition after animation is done
-            setTimeout(() => {
-                element.target.style.transition = transitionBefore
-            }, duration + 10)
-        }
-
-        // set transform back to normal
-        element.target.style.transform = ''
-    }
-
-    debug.log('follow.destroy() finished')
+    debug.log('follow destroyed')
 }
 
 follow.animate = (event) => {
+    // if the script is locked (mostly because of an animation) dont do animation
+    if (follow.locked) return
+
     // define mouse position
     let mouseX = event.clientX
     let mouseY = event.clientY
@@ -106,12 +94,12 @@ follow.animate = (event) => {
         // add helper dot if wanted
         debug.dot(futureX, futureY, 'green')
 
-        // set the additional pixels as css transform translate
-        element.target.style.transform = `translate(${additionalX}px, ${additionalY}px)`
-
         // log
         debug.log('future position x', futureX)
         debug.log('future position y', futureY)
+
+        // set the additional pixels as css transform translate
+        element.target.style.transform = `translate(${additionalX}px, ${additionalY}px)`
     }
 }
 
