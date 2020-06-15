@@ -29,22 +29,31 @@ follow.init = () => {
         let element = {
             target: target,
             factor: factor,
-            firstTransform: true,
             position: {
                 x: 0,
                 y: 0
             },
             initial: {
                 x: 0,
-                y: 0
+                y: 0,
+                transform: ''
             },
         }
 
         // define initial position
-        element.initial = helper.getPosition(element.target)
+        let initialPosition = helper.getPosition(element.target)
+        element.initial.x = initialPosition.x
+        element.initial.y = initialPosition.y
+
+        // define initial transform
+        element.initial.transform = getComputedStyle(element.target).transform
 
         // add debug dot to the initial position of the target
         debug.dot(element.initial.x, element.initial.y, 'red', 10000)
+
+        if (element.target.style.transform.search(/\btranslate\b/) >= 0) {
+            console.warn('follow-js: following element already has the css translate property and might have a weird behaviour. Try removing this property or give the data-follow attribute to a wrapper of this element.', element.target)
+        }
 
         // push element to array
         follow.elements.push(element)
@@ -99,7 +108,7 @@ follow.animate = (event) => {
         debug.log('future position y', futureY)
 
         // set the additional pixels as css transform translate
-        element.target.style.transform = `translate(${additionalX}px, ${additionalY}px)`
+        element.target.style.transform = `${element.initial.transform} translate(${additionalX}px, ${additionalY}px)`
     }
 }
 
