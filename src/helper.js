@@ -65,3 +65,26 @@ export function destroyListeners () {
     document.removeEventListener('mousemove', follow.animate)
     document.removeEventListener('mouseout', transitToInitHelper)
 }
+
+export function buildTransform (element, translate = '') {
+    // get current transform
+    let current = element.current.transform
+
+    // split current to get transform without translate
+    let first = current.split('translate(')
+    let second = []
+    let without = ''
+
+    if (first.length > 1) {
+        // if translate exists
+        second = first[1].split(')')
+        without = first[0] + second[1].trim()
+    } else {
+        // if it isn't existing
+        without = first[0]
+    }
+    // build together with new translate
+    element.current.transform = `${without} ${translate}`
+
+    return element.current.transform
+}

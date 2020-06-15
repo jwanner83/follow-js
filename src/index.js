@@ -38,6 +38,9 @@ follow.init = () => {
                 y: 0,
                 transform: ''
             },
+            current: {
+                transform: ''
+            }
         }
 
         // define initial position
@@ -107,8 +110,8 @@ follow.animate = (event) => {
         debug.log('future position x', futureX)
         debug.log('future position y', futureY)
 
-        // set the additional pixels as css transform translate
-        element.target.style.transform = `${element.initial.transform} translate(${additionalX}px, ${additionalY}px)`
+        // set the additional pixels as css transform translate and keep other transform properties
+        element.target.style.transform = helper.buildTransform(element, `translate(${additionalX}px, ${additionalY}px)`)
     }
 }
 
