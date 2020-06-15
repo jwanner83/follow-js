@@ -1,27 +1,67 @@
-export function clone (element) {
-    // clone element
-    let absolute = element.target.cloneNode(true)
+let isOut = false
 
-    // give to the new element position absolute
-    absolute.style.position = 'absolute'
+export function getPosition (target, center = true) {
+    // define absolute location of element
+    let bodyRectangular = document.body.getBoundingClientRect()
+    let elemRect = target.getBoundingClientRect()
+    let x = elemRect.left - bodyRectangular.left
+    let y = elemRect.top - bodyRectangular.top
 
-    // add the correct dimensions to the element
-    absolute.style.height = element.dimensions.height + 'px'
-    absolute.style.width = element.dimensions.width + 'px'
+    // if position should be center of element get center
+    if (center) {
+        // define dimensions of the element
+        let height = target.offsetHeight
+        let width = target.offsetWidth
 
-    // position element to exact spot
-    absolute.style.left = element.initialPosition.x - (element.dimensions.width / 2) + 'px'
-    absolute.style.top = element.initialPosition.y - (element.dimensions.height / 2) + 'px'
+        x += (width / 2)
+        y += (height / 2)
+    }
 
-    // append absolute element to the body
-    document.body.append(absolute)
+    return {x: x, y: y}
+}
 
-    // hide old element but not remove it to keep the space
-    element.target.style.opacity = '0'
+export function transitToInit (event, duration = 200) {
+    for (const element of follow.elements) {
+        transit(element.target)
+    }
+}
 
-    // save element as before to add it back
-    element.before = element.target
+export function transit (target, position = {x:0,y:0}, duration = 200) {
+    let transitionBefore = getComputedStyle(target).transition
 
-    // add new element as new target
-    element.target = absolute
+    // if duration is higher than 0 do transition
+    if (duration > 0) {
+        target.style.transition = duration + 'ms'
+
+        // reset transition after animation is done
+        setTimeout(() => {
+            target.style.transition = transitionBefore
+        }, duration + 10)
+    }
+
+    let transformAfter = ''
+
+    if (position.x !== 0 && position.y !== 0) {
+        // set transform to given position
+        transformAfter = `translate(${position.x}px, ${position.y}px)`
+    }
+    // set transform back to normal
+    target.style.transform = transformAfter
+}
+
+function transitToInitHelper (event) {
+    let from = event.relatedTarget || event.toElement
+    if (!from || from.nodeName === "HTML") {
+        transitToInit(200)
+    }
+}
+
+export function activateListeners () {
+    document.addEventListener('mousemove', follow.animate)
+    document.addEventListener('mouseout', transitToInitHelper)
+}
+
+export function destroyListeners () {
+    document.removeEventListener('mousemove', follow.animate)
+    document.removeEventListener('mouseout', transitToInitHelper)
 }

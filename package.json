@@ -1,8 +1,8 @@
 {
   "name": "follow-js",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "description": "let elements follow your cursor",
-  "main": "dist/follow.js",
+  "main": "dist/follow.min.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jwanner83/follow-js.git"
@@ -12,7 +12,8 @@
     "js-animation",
     "css-animation",
     "ui",
-    "design"
+    "design",
+    "frontend"
   ],
   "author": "Jonas Wanner",
   "license": "ISC",
