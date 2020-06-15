@@ -11,14 +11,14 @@ window.follow = {
     defaultFactor: 10,
     init: undefined,
     destroy: undefined,
-    animate: undefined
+    animate: undefined,
+    locked: false
 }
 
 follow.init = () => {
     // get all targets with attribute
     let targets = document.querySelectorAll(`[${follow.attribute}]`)
 
-    // log
     debug.log('targets', targets)
 
     for (let target of targets) {
@@ -27,132 +27,79 @@ follow.init = () => {
 
         // create element object
         let element = {
-            factor: factor,
             target: target,
-            before: undefined,
-            x: 0,
-            y: 0,
-            dimensions: {
-                height: 0,
-                width: 0
+            factor: factor,
+            firstTransform: true,
+            position: {
+                x: 0,
+                y: 0
             },
-            initialPosition: {
+            initial: {
                 x: 0,
                 y: 0
             },
         }
 
-        // define absolute dimensions of the element
-        let bodyRectangular = document.body.getBoundingClientRect()
-        let elemRect = element.target.getBoundingClientRect()
-        let offsetLeft   = elemRect.left - bodyRectangular.left
-        let offsetTop   = elemRect.top - bodyRectangular.top
+        // define initial position
+        element.initial = helper.getPosition(element.target)
 
-        // define dimensions of the element
-        element.dimensions.height = element.target.offsetHeight
-        element.dimensions.width = element.target.offsetWidth
-
-        // define the center of the element as initial position
-        element.initialPosition.x = offsetLeft + (element.dimensions.width / 2)
-        element.initialPosition.y = offsetTop + (element.dimensions.height / 2)
-
-        // if center helper is wanted
-        debug.dot(element.initialPosition.x, element.initialPosition.y, 'red', 10000)
-
-        // if position isn't absolute clone element
-        if (getComputedStyle(element.target).position !== 'absolute') {
-            helper.clone(element)
-        } else {
-            // if container has position relative, remove element and add back on top of all
-            let parent = element.target.parentElement
-
-            while (true) {
-                // if parent is body break out of while
-                if (parent.tagName === 'BODY') {
-                    break
-                    // else if position is relative
-                } else if (getComputedStyle(parent).position === 'relative') {
-                    helper.clone(element)
-                    break
-                }
-                parent = parent.parentElement
-            }
-        }
+        // add debug dot to the initial position of the target
+        debug.dot(element.initial.x, element.initial.y, 'red', 10000)
 
         // push element to array
         follow.elements.push(element)
     }
 
-    // activate event listener
-    document.addEventListener('mousemove', follow.animate)
+    // activate event listeners
+    helper.activateListeners()
 
-    // log
     debug.log('elements', follow.elements)
 }
 
-follow.destroy = () => {
-    // log
-    debug.log('follow.destroy called')
+follow.destroy = (duration = 300) => {
+    // remove the event listeners
+    helper.destroyListeners()
 
-    // remove the event listener
-    document.removeEventListener('mousemove', follow.animate)
+    // transit elements to initial position
+    helper.transitToInit()
 
-    for (const element of follow.elements) {
-        if (element.before) {
-            // if before element exists, bring it back and remove absolute element
-            element.before.style.opacity = '1'
-            element.target.remove()
-        } else {
-            // set the initial position for all elements
-            element.target.style.left = element.initialPosition.x - (element.dimensions.width / 2) + 'px'
-            element.target.style.top = element.initialPosition.y - (element.dimensions.height / 2) + 'px'
-        }
-    }
-
-    // log
-    debug.log('follow.destroy() finished')
+    debug.log('follow destroyed')
 }
 
 follow.animate = (event) => {
+    // if the script is locked (mostly because of an animation) dont do animation
+    if (follow.locked) return
+
     // define mouse position
     let mouseX = event.clientX
     let mouseY = event.clientY
 
-    // firefox fallback because mouse is offset by y 15 and x 9 pixel
-    if (navigator.userAgent.search("Firefox") !== -1) {
-        mouseX += 9
-        mouseY += 15
-    }
-
-    // add dot for mouse
+    // add debug dot to the mouse position
     debug.dot(mouseX, mouseY, 'blue')
 
-    // log
     debug.log('mouseX', mouseX)
     debug.log('mouseY', mouseY)
 
     for (let element of follow.elements) {
-        // log
         debug.log('element', element)
 
         // calculate additional pixels
-        let additionalX = (mouseX - element.initialPosition.x) / element.factor
-        let additionalY = (mouseY - element.initialPosition.y) / element.factor
+        let additionalX = (mouseX - element.initial.x) / element.factor
+        let additionalY = (mouseY - element.initial.y) / element.factor
 
         // calculate future position
-        let futureX = (element.initialPosition.x + additionalX)
-        let futureY = (element.initialPosition.y + additionalY)
+        let futureX = (element.initial.x + additionalX)
+        let futureY = (element.initial.y + additionalY)
 
         // add helper dot if wanted
         debug.dot(futureX, futureY, 'green')
 
-        // set future position
-        element.target.style.left = futureX - (element.dimensions.width / 2) + 'px'
-        element.target.style.top = futureY - (element.dimensions.height / 2) + 'px'
-
         // log
         debug.log('future position x', futureX)
         debug.log('future position y', futureY)
+
+        // set the additional pixels as css transform translate
+        element.target.style.transform = `translate(${additionalX}px, ${additionalY}px)`
     }
 }
 
