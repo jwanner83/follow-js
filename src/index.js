@@ -1,13 +1,24 @@
 class Follow {
-    // object with default values
+    /**
+     * Object with all the default settings in it.
+     * The values may be overwritten
+     * @type {{}}
+     */
     default = {
         factor: 10,
         attribute: 'data-follow'
     }
 
-    // elements array
+    /**
+     * Array where all the elements are stored in
+     * @type {*[]}
+     */
     elements = []
 
+    /**
+     * Constructor
+     * @param options
+     */
     constructor(options) {
         // set default values
         this.setDefaults(options)
@@ -25,56 +36,40 @@ class Follow {
         targets.forEach(target => {this.elements.push(this.getElement(target))})
     }
 
+    /**
+     * Get the element with all the calculated values
+     * @param target
+     * @returns {{transform: {current: string, initial: string, translate: {current: {x: number, y: number}, initial:
+     *  {x: number, y: number}}}, position: {current: {x: number, y: number}, initial: {x: number, y: number}},
+     *  factor: string | number, target: *}}
+     */
     getElement (target) {
         let factor = target.getAttribute(this.default.attribute) || this.default.factor
+        let initialPosition = this.getPosition(target)
+        let initialTranslate = this.getTranslate(target)
 
-        let element = {
+        return {
             target: target,
             factor: factor,
             position: {
-                initial: {
-                    x: 0,
-                    y: 0
-                },
-                current: {
-                    x: 0,
-                    y: 0
-                }
+                initial: initialPosition,
+                current: initialPosition
             },
             transform: {
-                initial: {
-                    x: 0,
-                    y: 0
-                },
-                current: {
-                    x: 0,
-                    y: 0
+                initial: '',
+                current: '',
+                translate: {
+                    initial: initialTranslate,
+                    current: initialTranslate
                 }
             }
         }
-
-        // set initial and current position (both the same)
-        element.position.initial = this.getPosition(target)
-        element.position.current = element.position.initial
-
-        // define initial transform
-        element.initial.transform = getComputedStyle(element.target).transform
-
-        // add debug dot to the initial position of the target
-        debug.dot(element.initial.x, element.initial.y, 'red', 10000)
-
-        if (element.target.style.transform.search(/\btranslate\b/) >= 0) {
-            console.warn('follow-js: following element already has the css translate property and might have a weird behaviour. Try removing this property or give the data-follow attribute to a wrapper of this element.', element.target)
-        }
-
-        // push element to array
-        follow.elements.push(element)
     }
 
     /**
-     * Get current position of the target
+     * Get current absolute position of the target
      * @param target
-     * @return object with x and y
+     * @returns {{x: number, y: number}}
      */
     getPosition (target) {
         // define absolute location of element relative to the body
@@ -93,6 +88,19 @@ class Follow {
         return {
             x: x,
             y: y
+        }
+    }
+
+    /**
+     * Get the current values of the css transform translate property
+     * If the property doesn't exist, the numbers will be 0
+     * @param target
+     * @returns {{x: number, y: number}}
+     */
+    getTranslate (target) {
+        return {
+            x: 0,
+            y: 0
         }
     }
 
