@@ -1,3 +1,4 @@
+/*
 // adds a dot to the given position if enabled
 export function dot (x, y, color = 'red', timeout = 3000) {
     if (follow.debug.dot) {
@@ -27,4 +28,4 @@ export function log (string, object = undefined) {
             console.log(string)
         }
     }
-}
+}*/

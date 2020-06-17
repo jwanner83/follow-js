@@ -1,3 +1,4 @@
+/*
 let isOut = false
 
 export function getPosition (target, center = true) {
@@ -68,7 +69,7 @@ export function destroyListeners () {
 
 export function buildTransform (element, translate = '') {
     // get current transform
-    let current = element.current.transform
+    let current = element.target.style.transform
 
     // split current to get transform without translate
     let first = current.split('translate(')
@@ -83,8 +84,9 @@ export function buildTransform (element, translate = '') {
         // if it isn't existing
         without = first[0]
     }
+
     // build together with new translate
     element.current.transform = `${without} ${translate}`
 
     return element.current.transform
-}
+}*/
