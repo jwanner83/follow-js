@@ -23,8 +23,7 @@
   "homepage": "https://github.com/jwanner83/follow-js#readme",
   "devDependencies": {
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
-    "ts-loader": "^7.0.5"
+    "webpack-cli": "^3.3.11"
   },
   "scripts": {
     "build": "webpack"

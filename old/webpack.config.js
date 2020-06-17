@@ -6,18 +6,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'follow.min.js'
   },
-  resolve: {
-    extensions: [".tsx", ".ts", ".js", ".json"]
-  },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: ["ts-loader"],
-        exclude: /node_modules/
-      }
-    ]
-  },
   mode: 'production',
   watch: true
 }
