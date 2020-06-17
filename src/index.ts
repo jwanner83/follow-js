@@ -4,22 +4,21 @@ class Follow {
      * The values may be overwritten
      * @type {{}}
      */
-    default : object = {
+    default: object = {
         factor: 10,
         attribute: 'data-follow'
     }
-
     /**
      * Array where all the elements are stored in
      * @type {*[]}
      */
-    elements : Array<object>
+    elements: Array<FollowElement>
 
     /**
      * Constructor
      * @param options
      */
-    constructor(options : object) {
+    constructor(options: object) {
         // set default values
         this.setDefaults(options)
 
@@ -31,19 +30,12 @@ class Follow {
      * Initiate the script
      * Get all elements with the given attribute and activate the animation
      */
-    initiate () {
-        let targets = document.querySelectorAll(`[${this.default['attribute']}]`)
-        targets.forEach(target => {this.elements.push(this.getElement(target))})
+    initiate() {
+        let targets: NodeListOf<HTMLElement> = document.querySelectorAll(`[${this.default['attribute']}]`)
+        targets.forEach(target => this.elements.push(new FollowElement(target)))
     }
 
-    /**
-     * Get the element with all the calculated values
-     * @param target
-     * @returns {{transform: {current: string, initial: string, translate: {current: {x: number, y: number}, initial:
-     *  {x: number, y: number}}}, position: {current: {x: number, y: number}, initial: {x: number, y: number}},
-     *  factor: string | number, target: *}}
-     */
-    getElement (target : Element) {
+    getElement(target: HTMLElement) {
         let factor = target.getAttribute(this.default['attribute']) || this.default['factor']
         let initialPosition = this.getPosition(target)
         let initialTranslate = this.getTranslate(target)
@@ -71,16 +63,16 @@ class Follow {
      * @param target
      * @returns {{x: number, y: number}}
      */
-    getPosition (target : Element) {
+    getPosition(target: HTMLElement) {
         // define absolute location of element relative to the body
-        let bodyRectangular = document.body.getBoundingClientRect()
-        let elemRect = target.getBoundingClientRect()
-        let x = elemRect.left - bodyRectangular.left
-        let y = elemRect.top - bodyRectangular.top
+        let bodyRectangular: ClientRect = document.body.getBoundingClientRect()
+        let elemRect: ClientRect = target.getBoundingClientRect()
+        let x: number = elemRect.left - bodyRectangular.left
+        let y: number = elemRect.top - bodyRectangular.top
 
         // define dimensions of the element to get the posit
-        let height = target.offsetHeight
-        let width = target.offsetWidth
+        let height: number = target.offsetHeight
+        let width: number = target.offsetWidth
 
         x += (width / 2)
         y += (height / 2)
@@ -97,10 +89,19 @@ class Follow {
      * @param target
      * @returns {{x: number, y: number}}
      */
-    getTranslate (target : Element) {
-        return {
-            x: 0,
-            y: 0
+    getTranslate(target: HTMLElement) {
+        let matches: Array = target.style.transform.match(/translate\(.*?\)/)
+        let match : String = Array.isArray(matches) && matches.length > 0 ? matches[0] : null
+
+        if (match) {
+            let content : String = match.match(/\(.*?\)/)
+            content = content.slice(0, -1)
+            content = content.substr(1)
+            let values : Array<Number> = content.split(', ')
+
+            return new Position()
+        } else {
+            return undefined
         }
     }
 
@@ -108,11 +109,68 @@ class Follow {
      * Set follow-js defaults if they have been passed in the object initialization
      * @param options
      */
-    setDefaults (options : object) {
+    setDefaults(options: object) {
         if (options && options['default']) {
             for (const property in this.default) {
                 this.default[property] = options['default'][property] || this.default[property]
             }
+        }
+    }
+}
+
+/**
+ * Element which the
+ */
+class FollowElement {
+    target: HTMLElement
+    factor: Number
+    position: {
+        initial: Position,
+        current: Position
+    }
+    transform: {
+        initial: String,
+        current: String,
+        translate: {
+            initial: Position,
+            current: Position
+        }
+    }
+
+    constructor(target: HTMLElement) {
+        let factor = target.getAttribute(this.default['attribute']) || this.default['factor']
+    }
+
+    set translate (position : Position) {
+
+    }
+
+    get translate () {
+
+    }
+
+    private getTranslate() {
+
+    }
+}
+
+class Position {
+    x: number
+    y: number
+
+    constructor (x: number, y: number) {
+        this.x = x
+        this.y = y
+    }
+
+    /**
+     * Get Full Position as Object
+     * @returns {{x: number, y: number}}
+     */
+    get full () {
+        return {
+            x: this.x,
+            y: this.y
         }
     }
 }
