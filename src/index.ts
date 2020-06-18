@@ -3,23 +3,19 @@ class Follow {
      * The options for the follow script
      * @type FollowDefaults
      */
-    defaults: FollowDefaults = new FollowDefaults()
+    public defaults: FollowDefaults = new FollowDefaults
 
     /**
      * Array where all the elements are stored in
-     * @type {Array<FollowElement>}
+     * @type Array<FollowElement>
      */
-    elements: Array<FollowElement>
+    public elements: Array<FollowElement> = new Array<FollowElement>()
 
     /**
      * Constructor
      * @param options
      */
-    constructor (options: object) {
-        // set defaults
-        this.setDefaults(options)
-
-        // initiate elements
+    constructor (options: object = undefined) {
         this.initiate()
     }
 
@@ -27,17 +23,49 @@ class Follow {
      * Initiate the script
      * Get all elements with the given attribute and activate the animation
      */
-    initiate () {
+    public initiate () {
         let targets: NodeListOf<HTMLElement> = document.querySelectorAll(`[${this.defaults['attribute']}]`)
         targets.forEach(target => this.elements.push(new FollowElement(target, this.defaults)))
+
+        let context = this
+        document.addEventListener('mousemove', (event) => {
+            Follow.animate(event, context)
+        })
     }
 
     /**
      * Destroy the script
      * Remove all elements and set them to their normal position
      */
-    destroy () {
-        this.elements = Array<FollowElement>()
+    public destroy () {
+        this.elements = new Array<FollowElement>()
+    }
+
+    /**
+     * Destroy the script and initiate it again with the same options
+     */
+    public refresh () {
+        this.destroy()
+        this.initiate()
+    }
+
+    /**
+     * Animate the element
+     * @param event
+     * @param context
+     */
+    private static animate (event, context) {
+        let mouse: FollowPosition = new FollowPosition(event.clientX, event.clientY)
+
+        for (let element of context.elements) {
+            let additional: FollowPosition = new FollowPosition(
+                ((mouse.x - element.position.x) / element.factor),
+                ((mouse.y - element.position.y) / element.factor)
+            )
+
+            // set the additional pixels as css transform translate
+            element.target.style.transform = `translate(${additional.x}px, ${additional.y}px)`
+        }
     }
 
     /**
@@ -54,17 +82,61 @@ class Follow {
 }
 
 class FollowElement {
-    target: HTMLElement
-    factor: Number
-    transform: FollowTransform
-    position: FollowPosition
+    /**
+     * The HTML target of the Follow Element
+     * @type HTMLElement
+     */
+    public target: HTMLElement
 
+    /**
+     * The factor which defines how fast the element follows
+     * @type number
+     */
+    public factor: number
+
+    /**
+     * The position of the element
+     * @type FollowPosition
+     */
+    public position: FollowPosition
+
+    /**
+     * Constructor
+     * @param target
+     * @param defaults
+     */
     constructor (target: HTMLElement, defaults: FollowDefaults) {
-        let factor = target.getAttribute(defaults['attribute']) || defaults['factor']
+        this.target = target
+        this.factor = parseInt(target.getAttribute(defaults['attribute'])) || defaults['factor']
+        this.position = this.getPosition()
     }
 
-    get translate () {
-        return
+    /**
+     * Get position of target to calculate translate values
+     * @return {FollowPosition}
+     */
+    public getPosition () {
+        // define absolute location of element
+        let bodyRectangular: ClientRect = document.body.getBoundingClientRect()
+        let elemRect: ClientRect = this.target.getBoundingClientRect()
+        let x: number = elemRect.left - bodyRectangular.left
+        let y: number = elemRect.top - bodyRectangular.top
+
+        // calculate position center of element
+        let height: number = this.target.offsetHeight
+        let width: number = this.target.offsetWidth
+
+        x += (width / 2)
+        y += (height / 2)
+
+        return new FollowPosition(x, y)
+    }
+
+    /**
+     * Update the position of the element
+     */
+    public updatePosition () {
+         this.position = this.getPosition()
     }
 }
 
@@ -112,7 +184,7 @@ class FollowPosition {
 
     /**
      * Get Full 3d Position as Object
-     * @returns {{x: number, y: number}}
+     * @returns {{x: number, y: number, z: number}}
      */
     get full3d () {
         return {
@@ -120,32 +192,6 @@ class FollowPosition {
             y: this.y,
             z: this.z
         }
-    }
-}
-
-class FollowTransform {
-    target: HTMLElement
-    translate: Array<FollowPosition>
-    translate3d: Array<FollowPosition>
-    rotate: Array<FollowPosition>
-
-    constructor (target: HTMLElement) {
-
-    }
-
-    /**
-     * This updates the transform properties to their newest stand
-     * @param target (optional)
-     */
-    update (target: HTMLElement = this.target) {
-
-    }
-
-    /**
-     * @return string
-     */
-    toString () {
-        
     }
 }
 
@@ -157,3 +203,15 @@ class FollowDefaults {
     factor: number = 10
     attribute: string = 'data-follow'
 }
+
+/**
+ * Check if auto init is enabled and if true, auto initialize the script
+ */
+(() => {
+    if (document.currentScript) {
+        let value: string = document.currentScript.getAttribute('data-follow-auto')
+        if (value === '' || value === 'true') {
+            window['follow'] = new Follow()
+        }
+    }
+})()
