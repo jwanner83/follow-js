@@ -1,16 +1,13 @@
 class Follow {
     /**
-     * Object with all the default settings in it.
-     * The values may be overwritten
-     * @type {{}}
+     * The options for the follow script
+     * @type FollowDefaults
      */
-    default: object = {
-        factor: 10,
-        attribute: 'data-follow'
-    }
+    defaults: FollowDefaults = new FollowDefaults()
+
     /**
      * Array where all the elements are stored in
-     * @type {*[]}
+     * @type {Array<FollowElement>}
      */
     elements: Array<FollowElement>
 
@@ -18,8 +15,8 @@ class Follow {
      * Constructor
      * @param options
      */
-    constructor(options: object) {
-        // set default values
+    constructor (options: object) {
+        // set defaults
         this.setDefaults(options)
 
         // initiate elements
@@ -30,147 +27,133 @@ class Follow {
      * Initiate the script
      * Get all elements with the given attribute and activate the animation
      */
-    initiate() {
-        let targets: NodeListOf<HTMLElement> = document.querySelectorAll(`[${this.default['attribute']}]`)
-        targets.forEach(target => this.elements.push(new FollowElement(target)))
-    }
-
-    getElement(target: HTMLElement) {
-        let factor = target.getAttribute(this.default['attribute']) || this.default['factor']
-        let initialPosition = this.getPosition(target)
-        let initialTranslate = this.getTranslate(target)
-
-        return {
-            target: target,
-            factor: factor,
-            position: {
-                initial: initialPosition,
-                current: initialPosition
-            },
-            transform: {
-                initial: '',
-                current: '',
-                translate: {
-                    initial: initialTranslate,
-                    current: initialTranslate
-                }
-            }
-        }
+    initiate () {
+        let targets: NodeListOf<HTMLElement> = document.querySelectorAll(`[${this.defaults['attribute']}]`)
+        targets.forEach(target => this.elements.push(new FollowElement(target, this.defaults)))
     }
 
     /**
-     * Get current absolute position of the target
-     * @param target
-     * @returns {{x: number, y: number}}
+     * Destroy the script
+     * Remove all elements and set them to their normal position
      */
-    getPosition(target: HTMLElement) {
-        // define absolute location of element relative to the body
-        let bodyRectangular: ClientRect = document.body.getBoundingClientRect()
-        let elemRect: ClientRect = target.getBoundingClientRect()
-        let x: number = elemRect.left - bodyRectangular.left
-        let y: number = elemRect.top - bodyRectangular.top
-
-        // define dimensions of the element to get the posit
-        let height: number = target.offsetHeight
-        let width: number = target.offsetWidth
-
-        x += (width / 2)
-        y += (height / 2)
-
-        return {
-            x: x,
-            y: y
-        }
+    destroy () {
+        this.elements = Array<FollowElement>()
     }
 
     /**
-     * Get the current values of the css transform translate property
-     * If the property doesn't exist, the numbers will be 0
-     * @param target
-     * @returns {{x: number, y: number}}
-     */
-    getTranslate(target: HTMLElement) {
-        let matches: Array = target.style.transform.match(/translate\(.*?\)/)
-        let match : String = Array.isArray(matches) && matches.length > 0 ? matches[0] : null
-
-        if (match) {
-            let content : String = match.match(/\(.*?\)/)
-            content = content.slice(0, -1)
-            content = content.substr(1)
-            let values : Array<Number> = content.split(', ')
-
-            return new Position()
-        } else {
-            return undefined
-        }
-    }
-
-    /**
-     * Set follow-js defaults if they have been passed in the object initialization
+     * Set FollowOptions if they have been passed in the object initialization
      * @param options
      */
-    setDefaults(options: object) {
+    setDefaults (options: object) {
         if (options && options['default']) {
-            for (const property in this.default) {
-                this.default[property] = options['default'][property] || this.default[property]
+            for (const property in this.defaults) {
+                if (this.defaults.hasOwnProperty(property)) this.defaults[property] = options['default'][property] || this.defaults[property]
             }
         }
     }
 }
 
-/**
- * Element which the
- */
 class FollowElement {
     target: HTMLElement
     factor: Number
-    position: {
-        initial: Position,
-        current: Position
-    }
-    transform: {
-        initial: String,
-        current: String,
-        translate: {
-            initial: Position,
-            current: Position
-        }
-    }
+    transform: FollowTransform
+    position: FollowPosition
 
-    constructor(target: HTMLElement) {
-        let factor = target.getAttribute(this.default['attribute']) || this.default['factor']
-    }
-
-    set translate (position : Position) {
-
+    constructor (target: HTMLElement, defaults: FollowDefaults) {
+        let factor = target.getAttribute(defaults['attribute']) || defaults['factor']
     }
 
     get translate () {
-
-    }
-
-    private getTranslate() {
-
+        return
     }
 }
 
-class Position {
+class FollowPosition {
+    /**
+     * X Value of Position
+     * @type number
+     */
     x: number
+
+    /**
+     * Y Value of Position
+     * @type number
+     */
     y: number
 
-    constructor (x: number, y: number) {
+    /**
+     * Z Value of Position
+     * @type number
+     */
+    z: number
+
+    /**
+     * Constructor
+     * @param x
+     * @param y
+     * @param z (optional)
+     */
+    constructor (x: number, y: number, z: number = 0) {
         this.x = x
         this.y = y
+        this.z = z
     }
 
     /**
-     * Get Full Position as Object
+     * Get Full 2d Position as Object
      * @returns {{x: number, y: number}}
      */
-    get full () {
+    get full2d () {
         return {
             x: this.x,
             y: this.y
         }
     }
+
+    /**
+     * Get Full 3d Position as Object
+     * @returns {{x: number, y: number}}
+     */
+    get full3d () {
+        return {
+            x: this.x,
+            y: this.y,
+            z: this.z
+        }
+    }
+}
+
+class FollowTransform {
+    target: HTMLElement
+    translate: Array<FollowPosition>
+    translate3d: Array<FollowPosition>
+    rotate: Array<FollowPosition>
+
+    constructor (target: HTMLElement) {
+
+    }
+
+    /**
+     * This updates the transform properties to their newest stand
+     * @param target (optional)
+     */
+    update (target: HTMLElement = this.target) {
+
+    }
+
+    /**
+     * @return string
+     */
+    toString () {
+        
+    }
+}
+
+/**
+ * Object with all the default settings in it.
+ * The values may be overwritten
+ */
+class FollowDefaults {
+    factor: number = 10
+    attribute: string = 'data-follow'
 }
