@@ -13,9 +13,10 @@ class Follow {
 
     /**
      * Constructor
-     * @param options
+     * @param {object} options
      */
     constructor (options: object = undefined) {
+        this.setDefaults(options)
         this.initiate()
     }
 
@@ -27,7 +28,11 @@ class Follow {
         let targets: NodeListOf<HTMLElement> = document.querySelectorAll(`[${this.defaults['attribute']}]`)
         targets.forEach(target => this.elements.push(new FollowElement(target, this.defaults)))
 
+        // because a class intern function which is called inside an eventListener on the document doesn't have the
+        // right context to the class to use class properties, we need to define the context into a variable and set
+        // it as attribute to the function
         let context = this
+
         document.addEventListener('mousemove', (event) => {
             Follow.animate(event, context)
         })
@@ -51,26 +56,26 @@ class Follow {
 
     /**
      * Animate the element
-     * @param event
+     * @param {MouseEvent} event
      * @param context
      */
-    private static animate (event, context) {
+    private static animate (event: MouseEvent, context) {
         let mouse: FollowPosition = new FollowPosition(event.clientX, event.clientY)
 
         for (let element of context.elements) {
             let additional: FollowPosition = new FollowPosition(
-                ((mouse.x - element.position.x) / element.factor),
-                ((mouse.y - element.position.y) / element.factor)
+                Number(parseFloat(((mouse.x - element.position.x) / element.factor).toString()).toFixed(2)),
+                Number(parseFloat(((mouse.y - element.position.y) / element.factor).toString()).toFixed(2))
             )
 
             // set the additional pixels as css transform translate
-            element.target.style.transform = `translate(${additional.x}px, ${additional.y}px)`
+            element.setTranslate(additional)
         }
     }
 
     /**
      * Set FollowOptions if they have been passed in the object initialization
-     * @param options
+     * @param {object} options
      */
     setDefaults (options: object) {
         if (options && options['default']) {
@@ -101,9 +106,15 @@ class FollowElement {
     public position: FollowPosition
 
     /**
+     * The current translate property
+     * @type string
+     */
+    public translate: string
+
+    /**
      * Constructor
-     * @param target
-     * @param defaults
+     * @param {HTMLElement} target
+     * @param {FollowDefaults} defaults
      */
     constructor (target: HTMLElement, defaults: FollowDefaults) {
         this.target = target
@@ -136,7 +147,29 @@ class FollowElement {
      * Update the position of the element
      */
     public updatePosition () {
-         this.position = this.getPosition()
+        this.position = this.getPosition()
+    }
+
+    /**
+     * Replace the new translate property with the old one
+     * @param {FollowPosition} position
+     */
+    public setTranslate (position: FollowPosition) {
+        // if value is exactly zero, change to 0.01 because the css interpreter in the browser interprets it different
+        if (position.x === 0) position.x = 0.01
+        if (position.y === 0) position.y = 0.01
+
+        let transform: string = this.target.style.transform
+        let translate: string = `translate(${position.x}px, ${position.y}px)`
+
+        if (this.translate) {
+            transform = transform.replace(this.translate, translate)
+        } else {
+            transform += ` ${translate}`.trim()
+        }
+
+        this.translate = translate
+        this.target.style.transform = transform
     }
 }
 
@@ -161,37 +194,14 @@ class FollowPosition {
 
     /**
      * Constructor
-     * @param x
-     * @param y
-     * @param z (optional)
+     * @param {number} x
+     * @param {number} y
+     * @param {number} z (optional)
      */
     constructor (x: number, y: number, z: number = 0) {
         this.x = x
         this.y = y
         this.z = z
-    }
-
-    /**
-     * Get Full 2d Position as Object
-     * @returns {{x: number, y: number}}
-     */
-    get full2d () {
-        return {
-            x: this.x,
-            y: this.y
-        }
-    }
-
-    /**
-     * Get Full 3d Position as Object
-     * @returns {{x: number, y: number, z: number}}
-     */
-    get full3d () {
-        return {
-            x: this.x,
-            y: this.y,
-            z: this.z
-        }
     }
 }
 
@@ -206,6 +216,7 @@ class FollowDefaults {
 
 /**
  * Check if auto init is enabled and if true, auto initialize the script
+ * To enable it, add the attribute 'data-follow-auto' to the place where you add the script in your code
  */
 (() => {
     if (document.currentScript) {
