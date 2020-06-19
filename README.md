@@ -20,9 +20,9 @@ script or create an instance of the follow class with `let follow = new Follow()
 
 ### unpkg
 #### with auto init
-`<script src="https://unpkg.com/follow-js@2.0.0/dist/follow.min.js" data-follow-auto></script>`
+`<script src="https://unpkg.com/follow-js@2.1.0/dist/follow.min.js" data-follow-auto></script>`
 #### without auto init
-`<script src="https://unpkg.com/follow-js@2.0.0/dist/follow.min.js"></script>`
+`<script src="https://unpkg.com/follow-js@2.1.0/dist/follow.min.js"></script>`
 
 ## Methods
 ### initiate
