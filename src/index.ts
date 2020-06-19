@@ -64,8 +64,8 @@ class Follow {
 
         for (let element of context.elements) {
             let additional: FollowPosition = new FollowPosition(
-                Number(parseFloat(((mouse.x - element.position.x) / element.factor).toString()).toFixed(2)),
-                Number(parseFloat(((mouse.y - element.position.y) / element.factor).toString()).toFixed(2))
+                (Math.ceil(((mouse.x - element.position.x) / element.factor) / 2) * 2),
+                (Math.ceil(((mouse.y - element.position.y) / element.factor) / 2) * 2)
             )
 
             // set the additional pixels as css transform translate
