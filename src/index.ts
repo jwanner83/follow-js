@@ -17,8 +17,6 @@ class Follow {
      */
     constructor (options: object = undefined) {
         this.setDefaults(options)
-
-        console.log('defaults', this.defaults)
         this.defaults.initiate && this.initiate()
     }
 
@@ -82,10 +80,6 @@ class Follow {
     setDefaults (options: object) {
         if (options && options['defaults']) {
             for (const property in this.defaults) {
-                console.log('property', property)
-                console.log('this.defaults.hasOwnProperty(property)', this.defaults.hasOwnProperty(property))
-                console.log('options[\'defaults\'][property] !== undefined', options['defaults'][property] !== undefined)
-                console.log('options[\'defaults\'][property] !== undefined || this.defaults[property]', options['defaults'][property] !== undefined || this.defaults[property])
                 if (this.defaults.hasOwnProperty(property) && options['defaults'][property] !== undefined) {
                     this.defaults[property] = options['defaults'][property]
                 }
