@@ -17,7 +17,9 @@ class Follow {
      */
     constructor (options: object = undefined) {
         this.setDefaults(options)
-        this.initiate()
+
+        console.log('defaults', this.defaults)
+        this.defaults.initiate && this.initiate()
     }
 
     /**
@@ -59,13 +61,13 @@ class Follow {
      * @param {MouseEvent} event
      * @param context
      */
-    private static animate (event: MouseEvent, context) {
+    private static animate (event: MouseEvent, context: any) {
         let mouse: FollowPosition = new FollowPosition(event.clientX, event.clientY)
 
         for (let element of context.elements) {
             let additional: FollowPosition = new FollowPosition(
-                (Math.ceil(((mouse.x - element.position.x) / element.factor) / 2) * 2),
-                (Math.ceil(((mouse.y - element.position.y) / element.factor) / 2) * 2)
+                Number(parseFloat(((mouse.x - element.position.x) / element.factor).toString()).toFixed(3)),
+                Number(parseFloat(((mouse.y - element.position.y) / element.factor).toString()).toFixed(3))
             )
 
             // set the additional pixels as css transform translate
@@ -78,9 +80,15 @@ class Follow {
      * @param {object} options
      */
     setDefaults (options: object) {
-        if (options && options['default']) {
+        if (options && options['defaults']) {
             for (const property in this.defaults) {
-                if (this.defaults.hasOwnProperty(property)) this.defaults[property] = options['default'][property] || this.defaults[property]
+                console.log('property', property)
+                console.log('this.defaults.hasOwnProperty(property)', this.defaults.hasOwnProperty(property))
+                console.log('options[\'defaults\'][property] !== undefined', options['defaults'][property] !== undefined)
+                console.log('options[\'defaults\'][property] !== undefined || this.defaults[property]', options['defaults'][property] !== undefined || this.defaults[property])
+                if (this.defaults.hasOwnProperty(property) && options['defaults'][property] !== undefined) {
+                    this.defaults[property] = options['defaults'][property]
+                }
             }
         }
     }
@@ -178,19 +186,19 @@ class FollowPosition {
      * X Value of Position
      * @type number
      */
-    x: number
+    public x: number
 
     /**
      * Y Value of Position
      * @type number
      */
-    y: number
+    public y: number
 
     /**
      * Z Value of Position
      * @type number
      */
-    z: number
+    public z: number
 
     /**
      * Constructor
@@ -210,8 +218,23 @@ class FollowPosition {
  * The values may be overwritten
  */
 class FollowDefaults {
-    factor: number = 10
-    attribute: string = 'data-follow'
+    /**
+     * The factor how much the element moves with your cursor
+     * @type {number}
+     */
+    public factor: number = 10
+
+    /**
+     * The attribute for the elements you want to follow
+     * @type {string}
+     */
+    public attribute: string = 'data-follow'
+
+    /**
+     * If the object should automatically initiate the script on initialization of the class
+     * @type {boolean}
+     */
+    public initiate: boolean = true
 }
 
 /**

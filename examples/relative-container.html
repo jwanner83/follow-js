@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Container Example - follow.js</title>
+    <title>Container Relative Example - follow.js</title>
 
     <style>
         body, html {
@@ -17,7 +17,17 @@
             align-items: center;
         }
 
+        .wrapper {
+            position: relative;
+            border: 1px solid black;
+            height: 600px;
+            width: 600px;
+            margin-top: 100px;
+            padding-top: 100px;
+        }
+
         .container {
+            position: relative;
             border: 1px solid black;
             height: 400px;
             width: 400px;
@@ -31,6 +41,7 @@
         }
 
         .item {
+            position: absolute;
             height: 100px;
             width: 100px;
             background: black;
@@ -43,15 +54,14 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="item" data-follow="8"></div>
+<div class="wrapper">
+    <div class="container">
+        <div class="item" data-follow="8"></div>
+    </div>
 </div>
 <div class="container">
     <div class="item" data-follow="8"></div>
 </div>
-
-<span class="mouth" data-follow="50">|_______|</span>
-
-<script src="../dist/follow.min.js"></script>
+<script src="../dist/follow.min.js" data-follow-auto></script>
 </body>
 </html>
