@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Exact Example - follow.js</title>
+    <title>Inverted Example - follow.js</title>
 
     <style>
         body, html {
@@ -18,23 +18,14 @@
         }
 
         .item {
-            position: absolute;
             height: 100px;
             width: 100px;
             background: black;
         }
-
-        .grid {
-            position: absolute;
-            height: 100px;
-            width: 100px;
-            border: 1px solid red;
-        }
     </style>
 </head>
 <body>
-<div class="item" data-follow></div>
-<section class="grid"></section>
+<div class="item" data-follow="-5"></div>
 
 <script src="../dist/follow.min.js" data-follow-auto></script>
 </body>
