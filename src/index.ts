@@ -36,6 +36,8 @@ class Follow {
         document.addEventListener('mousemove', (event) => {
             Follow.animate(event, context)
         })
+
+        // TODO jwa on scroll add something like this https://stackoverflow.com/questions/6519043/get-mouse-position-on-scroll
     }
 
     /**
