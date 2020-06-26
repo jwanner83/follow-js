@@ -1,4 +1,4 @@
-# follow-js
+# Follow.js
 An experimental, dependency free script that let elements follow your cursor without a huge overhead.
 
 ## Usage
@@ -14,9 +14,9 @@ script or create an instance of the follow class with `let follow = new Follow()
 `npm i follow-js`
 
 #### with auto init
-`<script src"node_modules/follow-js/dist/follow.min.js" data-follow-auto></script>`
+`<script src="node_modules/follow-js/dist/follow.min.js" data-follow-auto></script>`
 #### without auto init
-`<script src"node_modules/follow-js/dist/follow.min.js"></script>`
+`<script src="node_modules/follow-js/dist/follow.min.js"></script>`
 
 ### unpkg
 #### with auto init
@@ -56,6 +56,10 @@ Have a look in the `examples` folder to see some magic.
 Feel free to open a Pull request or create a Issue on this project.
 
 ## Update Log
+### v2.1.1
+- Fixing scroll bug to enable custom cursor
+- Adding custom scroll and cursor example 
+
 ### v2.1.0
 Complete rewrite with Typescript and classes
 

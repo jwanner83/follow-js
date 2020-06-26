@@ -1,15 +1,27 @@
 class Follow {
     /**
      * The options for the follow script
-     * @type FollowDefaults
+     * @type {FollowDefaults}
      */
-    public defaults: FollowDefaults = new FollowDefaults
+    public defaults: FollowDefaults = new FollowDefaults()
 
     /**
      * Array where all the elements are stored in
      * @type Array<FollowElement>
      */
     public elements: Array<FollowElement> = new Array<FollowElement>()
+
+    /**
+     * Position of the Mouse to use to calculate
+     * @type {FollowPosition}
+     */
+    public mouse: FollowPosition = new FollowPosition(0, 0)
+
+    /**
+     * Current scroll position to use to calculate
+     * @type {FollowPosition}
+     */
+    public scroll: FollowPosition = new FollowPosition(0, 0)
 
     /**
      * Constructor
@@ -28,13 +40,16 @@ class Follow {
         let targets: NodeListOf<HTMLElement> = document.querySelectorAll(`[${this.defaults['attribute']}]`)
         targets.forEach(target => this.elements.push(new FollowElement(target, this.defaults)))
 
-        // because a class intern function which is called inside an eventListener on the document doesn't have the
-        // right context to the class to use class properties, we need to define the context into a variable and set
-        // it as attribute to the function
         let context = this
 
         document.addEventListener('mousemove', (event) => {
-            Follow.animate(event, context)
+            Follow.updateMousePosition(new FollowPosition(event.clientX, event.clientY), context)
+            Follow.animate(context)
+        })
+
+        document.addEventListener('scroll', () => {
+            Follow.updateScrollPosition(new FollowPosition(window.scrollX, window.scrollY), context)
+            Follow.animate(context)
         })
     }
 
@@ -56,21 +71,38 @@ class Follow {
 
     /**
      * Animate the element
-     * @param {MouseEvent} event
      * @param context
      */
-    private static animate (event: MouseEvent, context: any) {
-        let mouse: FollowPosition = new FollowPosition(event.clientX, event.clientY)
-
+    private static animate (context: any) {
         for (let element of context.elements) {
             let additional: FollowPosition = new FollowPosition(
-                Number(parseFloat(((mouse.x - element.position.x) / element.factor).toString()).toFixed(3)),
-                Number(parseFloat(((mouse.y - element.position.y) / element.factor).toString()).toFixed(3))
+                parseFloat(((context.mouse.x + context.scroll.x - element.position.x) / element.factor).toString()),
+                parseFloat(((context.mouse.y + context.scroll.y - element.position.y) / element.factor).toString())
             )
 
             // set the additional pixels as css transform translate
             element.setTranslate(additional)
         }
+    }
+
+    /**
+     * Update the correct current mouse position
+     * @param {FollowPosition} position
+     * @param context
+     */
+    private static updateMousePosition (position: FollowPosition, context: any) {
+        context.mouse.x = position.x
+        context.mouse.y = position.y
+    }
+
+    /**
+     * Update the correct current scroll position
+     * @param {FollowPosition} position
+     * @param context
+     */
+    private static updateScrollPosition (position: FollowPosition, context: any) {
+        context.scroll.x = position.x
+        context.scroll.y = position.y
     }
 
     /**
@@ -158,8 +190,8 @@ class FollowElement {
      */
     public setTranslate (position: FollowPosition) {
         // if value is exactly zero, change to 0.01 because the css interpreter in the browser interprets it different
-        if (position.x === 0) position.x = 0.01
-        if (position.y === 0) position.y = 0.01
+        if (position.x === 0) position.x = 0.1
+        if (position.y === 0) position.y = 0.1
 
         let transform: string = this.target.style.transform
         let translate: string = `translate(${position.x}px, ${position.y}px)`

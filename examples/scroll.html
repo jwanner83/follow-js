@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scroll Example - follow.js</title>
+
+    <style>
+        body, html {
+            height: 200%;
+            width: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+        }
+
+        .item {
+            transition: 100ms all linear 0s;
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            top: 50%;
+            background: black;
+        }
+    </style>
+</head>
+<body>
+<div class="item" data-follow="5"></div>
+
+<script src="../dist/follow.min.js" data-follow-auto></script>
+</body>
+</html>
