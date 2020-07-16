@@ -11,7 +11,7 @@ script or create an instance of the follow class with `let follow = new Follow()
 
 ## Include Script
 ### local via npm
-`npm i follow-js`
+`npm i -s follow-js`
 
 #### with auto init
 `<script src="node_modules/follow-js/dist/follow.min.js" data-follow-auto></script>`
