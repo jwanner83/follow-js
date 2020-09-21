@@ -32,7 +32,7 @@
     "typescript": "^3.9.5"
   },
   "scripts": {
-    "build": "babel --out-file dist/follow.min.js src/index.ts --source-maps"
+    "build": "babel --out-file dist/follow.min.js src/Follow.ts --source-maps"
   },
   "dependencies": {}
 }
