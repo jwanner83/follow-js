@@ -1,4 +1,4 @@
-# Follow.js
+# follow.js
 An experimental, dependency free script that let elements follow your cursor without a huge overhead.
 
 ## Usage
@@ -20,9 +20,9 @@ script or create an instance of the follow class with `let follow = new Follow()
 
 ### unpkg
 #### with auto init
-`<script src="https://unpkg.com/follow-js@2.1.2/dist/follow.min.js" data-follow-auto></script>`
+`<script src="https://unpkg.com/follow-js@2.1.3/dist/follow.min.js" data-follow-auto></script>`
 #### without auto init
-`<script src="https://unpkg.com/follow-js@2.1.2/dist/follow.min.js"></script>`
+`<script src="https://unpkg.com/follow-js@2.1.3/dist/follow.min.js"></script>`
 
 ## Methods
 ### initiate
@@ -53,9 +53,15 @@ it won't do anything
 Have a look in the `examples` folder to see some magic. 
 
 ## Contribute
-Feel free to open a Pull request or create a Issue on this project.
+Feel free to open a Pull request or create an issue on this project.
 
 ## Update Log
+### v2.1.3
+- Split JavaScript classes into separate files
+
+### v2.1.2
+- Increment version number in the readme 
+
 ### v2.1.1
 - Fixing scroll bug to enable custom cursor
 - Adding custom scroll and cursor example 
