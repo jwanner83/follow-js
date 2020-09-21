@@ -33,5 +33,6 @@
   },
   "scripts": {
     "build": "babel --out-file dist/follow.min.js src/index.ts --source-maps"
-  }
+  },
+  "dependencies": {}
 }
