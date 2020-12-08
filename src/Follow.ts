@@ -2,7 +2,7 @@ import FollowElement from './FollowElement'
 import FollowPosition from './FollowPosition'
 import FollowDefaults from './FollowDefaults'
 
-export default class Follow {
+class Follow {
     /**
      * The options for the follow script
      * @type {FollowDefaults}

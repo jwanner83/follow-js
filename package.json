@@ -29,6 +29,5 @@
   },
   "scripts": {
     "build": "rollup src/Follow.ts --file dist/follow.min.js --format cjs --compact --exports named -p @rollup/plugin-typescript"
-  },
-  "dependencies": {}
+  }
 }
