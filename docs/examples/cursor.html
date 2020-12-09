@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cursor Example - follow.js</title>
+
+    <style>
+        body, html {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+        }
+
+        * {
+            cursor: none;
+        }
+
+        .cursor {
+            height: 20px;
+            width: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cursor-inner {
+            transition: 200ms;
+            height: 20px;
+            width: 20px;
+            background: #AC0000;
+            border-radius: 100%;
+        }
+
+        .wrapper {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .item {
+            height: 100px;
+            width: 100px;
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="cursor" data-follow="1">
+    <div class="cursor-inner"></div>
+</div>
+
+<div class="wrapper">
+    <a class="item" href="https://mozilla.com">Mozilla</a>
+    <a class="item" href="https://mozilla.com">Mozilla</a>
+</div>
+
+<script src="../../script/dist/follow.min.js" data-follow-auto></script>
+<script>
+    document.addEventListener('mousedown', (event) => {
+        document.querySelector('.cursor-inner').style.height = '10px'
+        document.querySelector('.cursor-inner').style.width = '10px'
+
+        console.log('event.offsetX', event.offsetX)
+        console.log('event.offsetY', event.offsetY)
+
+        document.elementsFromPoint(event.offsetX, event.offsetY).forEach(element => {
+            console.log(element)
+        })
+    })
+
+    document.addEventListener('mouseup', () => {
+        document.querySelector('.cursor-inner').style.height = '20px'
+        document.querySelector('.cursor-inner').style.width = '20px'
+    })
+</script>
+</body>
+</html>
