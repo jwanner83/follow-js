@@ -1,6 +1,6 @@
 {
   "name": "follow-js",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "let elements follow your cursor",
   "main": "dist/follow.min.js",
   "repository": {
@@ -22,16 +22,12 @@
   },
   "homepage": "https://github.com/jwanner83/follow-js#readme",
   "devDependencies": {
-    "@babel/cli": "^7.10.1",
-    "@babel/core": "^7.10.2",
-    "@babel/preset-typescript": "^7.10.1",
-    "babel-minify": "^0.5.1",
-    "babel-plugin-minify-simplify": "^0.5.1",
-    "babel-preset-minify": "^0.5.1",
-    "ts-loader": "^7.0.5",
-    "typescript": "^3.9.5"
+    "rollup": "^2.28.1",
+    "@rollup/plugin-typescript": "^6.0.0",
+    "tslib": "^2.0.1",
+    "typescript": "^4.0.3"
   },
   "scripts": {
-    "build": "babel --out-file dist/follow.min.js src/index.ts --source-maps"
+    "build": "rollup src/Follow.ts --file dist/follow.min.js --format cjs --compact --exports named -p @rollup/plugin-typescript"
   }
 }
