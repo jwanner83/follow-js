@@ -40,18 +40,18 @@ class Follow {
    * Initiate the script
    * Get all elements with the given attribute and activate the animation
    */
-  public initiate () {
-    let targets: NodeListOf<HTMLElement> = document.querySelectorAll(`[${this.defaults['attribute']}]`)
+  public initiate (): void {
+    const targets: NodeListOf<HTMLElement> = document.querySelectorAll(`[${this.defaults['attribute']}]`)
     targets.forEach(target => this.elements.push(new FollowElement(target, this.defaults)))
 
-    let context = this
+    const context = this
 
-    document.addEventListener('mousemove', (event) => {
+    document.addEventListener('mousemove', (event: MouseEvent): void => {
       Follow.updateMousePosition(new FollowPosition(event.clientX, event.clientY), context)
       Follow.animate(context)
     })
 
-    document.addEventListener('scroll', () => {
+    document.addEventListener('scroll', (): void => {
       Follow.updateScrollPosition(new FollowPosition(window.scrollX, window.scrollY), context)
       Follow.animate(context)
     })
@@ -61,14 +61,14 @@ class Follow {
    * Destroy the script
    * Remove all elements and set them to their normal position
    */
-  public destroy () {
+  public destroy (): void {
     this.elements = new Array<FollowElement>()
   }
 
   /**
    * Destroy the script and initiate it again with the same options
    */
-  public refresh () {
+  public refresh (): void {
     this.destroy()
     this.initiate()
   }
@@ -77,7 +77,7 @@ class Follow {
    * Animate the element
    * @param context
    */
-  private static animate (context: any) {
+  private static animate (context: any): void {
     for (let element of context.elements) {
       let additional: FollowPosition = new FollowPosition(
         parseFloat(((context.mouse.x + context.scroll.x - element.position.x) / element.factor).toString()),
@@ -94,7 +94,7 @@ class Follow {
    * @param {FollowPosition} position
    * @param context
    */
-  private static updateMousePosition (position: FollowPosition, context: any) {
+  private static updateMousePosition (position: FollowPosition, context: any): void {
     context.mouse.x = position.x
     context.mouse.y = position.y
   }
@@ -104,7 +104,7 @@ class Follow {
    * @param {FollowPosition} position
    * @param context
    */
-  private static updateScrollPosition (position: FollowPosition, context: any) {
+  private static updateScrollPosition (position: FollowPosition, context: any): void {
     context.scroll.x = position.x
     context.scroll.y = position.y
   }
@@ -113,7 +113,7 @@ class Follow {
    * Set FollowOptions if they have been passed in the object initialization
    * @param {object} options
    */
-  setDefaults (options: object) {
+  setDefaults (options: object): void {
     if (options && options['defaults']) {
       for (const property in this.defaults) {
         if (this.defaults.hasOwnProperty(property) && options['defaults'][property] !== undefined) {

@@ -41,7 +41,7 @@ export default class FollowElement {
    * Get position of target to calculate translate values
    * @return {FollowPosition}
    */
-  public getPosition () {
+  public getPosition (): FollowPosition {
     // define absolute location of element
     let bodyRectangular: ClientRect = document.body.getBoundingClientRect()
     let elemRect: ClientRect = this.target.getBoundingClientRect()
@@ -61,7 +61,7 @@ export default class FollowElement {
   /**
    * Update the position of the element
    */
-  public updatePosition () {
+  public updatePosition (): void {
     this.position = this.getPosition()
   }
 
@@ -69,7 +69,7 @@ export default class FollowElement {
    * Replace the new translate property with the old one
    * @param {FollowPosition} position
    */
-  public setTranslate (position: FollowPosition) {
+  public setTranslate (position: FollowPosition): void {
     // if value is exactly zero, change to 0.01 because the css interpreter in the browser interprets it different
     if (position.x === 0) position.x = 0.1
     if (position.y === 0) position.y = 0.1
