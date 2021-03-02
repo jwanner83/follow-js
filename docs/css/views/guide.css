@@ -1,0 +1,139 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, div, span, html, body {
+  font-family: "Century Gothic", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #FFF;
+}
+
+p, a, div, span {
+  color: #D0D0D0;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 120px;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+.btn__icon {
+  margin-left: 8px;
+}
+.btn--primary {
+  color: white;
+  background: #AC0000;
+  margin-left: 6px;
+}
+.btn--secondary {
+  color: black;
+  background: white;
+  margin-left: 15px;
+}
+.btn:hover {
+  opacity: 0.8;
+}
+.btn:active {
+  transform: scale(0.9);
+}
+
+body {
+  display: grid;
+  grid-template-columns: minmax(275px, 1fr) 5fr;
+  background: #000;
+}
+
+.navigation__inner {
+  padding: 50px;
+}
+.navigation__header {
+  padding: 30px 0 50px;
+  border-bottom: 1px solid #2B2B2B;
+  margin-bottom: 30px;
+}
+.navigation__header .header {
+  font-size: 34px;
+  margin: 0;
+}
+.navigation__header .header__inner {
+  color: #8F8F8F;
+}
+.navigation h1 {
+  margin: 6px 0;
+}
+.navigation h2 {
+  margin: 5px 0;
+  font-size: 20px;
+  color: #ddd;
+}
+
+.content {
+  overflow: auto;
+  position: relative;
+  background-color: #0b0b0b;
+}
+.content__item {
+  background: #AC0000;
+  position: absolute;
+  top: 200px;
+  left: 100px;
+  height: 500px;
+  width: 500px;
+  filter: blur(40px);
+  z-index: 1;
+}
+.content__inner {
+  position: relative;
+  padding: 100px 90px;
+  max-width: 1000px;
+  margin: 0 auto;
+  z-index: 2;
+}
+.content h1.no-margin-bottom, .content h2.no-margin-bottom, .content h3.no-margin-bottom, .content h4.no-margin-bottom {
+  margin-bottom: 0;
+}
+.content h1 {
+  font-size: 45px;
+}
+.content h2 {
+  font-size: 35px;
+  margin-top: 60px;
+}
+.content h3 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+.content p, .content code, .content a {
+  font-size: 20px;
+}
+.content p code {
+  display: inline-block;
+  padding: 4px 6px;
+}
+.content code {
+  background: #3336;
+  padding: 12px 15px;
+  border-radius: 3px;
+  display: block;
+}
+.content iframe {
+  height: 400px;
+  width: calc(100% + 120px);
+  margin: 30px -60px;
+}
+
+/*# sourceMappingURL=guide.css.map */

@@ -1,0 +1,11 @@
+h1, h2, h3, h4, h5, h6, p, a, div, span, html, body {
+  font-family: "Century Gothic", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $heading-color;
+}
+
+p, a, div, span {
+  color: $paragraph-color;
+}
