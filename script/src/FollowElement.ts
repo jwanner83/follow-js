@@ -43,14 +43,15 @@ export default class FollowElement {
    */
   public getPosition (): FollowPosition {
     // define absolute location of element
-    let bodyRectangular: ClientRect = document.body.getBoundingClientRect()
-    let elemRect: ClientRect = this.target.getBoundingClientRect()
+    const bodyRectangular: ClientRect = document.body.getBoundingClientRect()
+    const elemRect: ClientRect = this.target.getBoundingClientRect()
+
     let x: number = elemRect.left - bodyRectangular.left
     let y: number = elemRect.top - bodyRectangular.top
 
     // calculate position center of element
-    let height: number = this.target.offsetHeight
-    let width: number = this.target.offsetWidth
+    const height: number = this.target.offsetHeight
+    const width: number = this.target.offsetWidth
 
     x += (width / 2)
     y += (height / 2)
@@ -75,7 +76,7 @@ export default class FollowElement {
     if (position.y === 0) position.y = 0.1
 
     let transform: string = this.target.style.transform
-    let translate: string = `translate(${position.x}px, ${position.y}px)`
+    const translate = `translate(${position.x}px, ${position.y}px)`
 
     if (this.translate) {
       transform = transform.replace(this.translate, translate)

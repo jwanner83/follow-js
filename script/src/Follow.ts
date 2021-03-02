@@ -31,7 +31,7 @@ class Follow {
    * Constructor
    * @param {object} options
    */
-  constructor (options: object = undefined) {
+  constructor (options: any = undefined) {
     this.setDefaults(options)
     this.defaults.initiate && this.initiate()
   }
@@ -78,8 +78,8 @@ class Follow {
    * @param context
    */
   private static animate (context: any): void {
-    for (let element of context.elements) {
-      let additional: FollowPosition = new FollowPosition(
+    for (const element of context.elements) {
+      const additional: FollowPosition = new FollowPosition(
         parseFloat(((context.mouse.x + context.scroll.x - element.position.x) / element.factor).toString()),
         parseFloat(((context.mouse.y + context.scroll.y - element.position.y) / element.factor).toString())
       )
@@ -113,10 +113,10 @@ class Follow {
    * Set FollowOptions if they have been passed in the object initialization
    * @param {object} options
    */
-  setDefaults (options: object): void {
+  setDefaults (options: any): void {
     if (options && options['defaults']) {
       for (const property in this.defaults) {
-        if (this.defaults.hasOwnProperty(property) && options['defaults'][property] !== undefined) {
+        if (Object.prototype.hasOwnProperty.call(this.defaults, property) && options['defaults'][property] !== undefined) {
           this.defaults[property] = options['defaults'][property]
         }
       }
@@ -130,7 +130,7 @@ class Follow {
  */
 (() => {
   if (document.currentScript) {
-    let value: string = document.currentScript.getAttribute('data-follow-auto')
+    const value: string = document.currentScript.getAttribute('data-follow-auto')
     if (value === '' || value === 'true') {
       window['follow'] = new Follow()
     }
