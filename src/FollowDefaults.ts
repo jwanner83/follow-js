@@ -20,4 +20,10 @@ export default class FollowDefaults {
    * @type {boolean}
    */
   public initiate = true
+
+  /**
+   * If debug mode is activated with log messages and visual helpers
+   * @type {boolean}
+   */
+  public debug = false
 }

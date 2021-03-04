@@ -1,6 +1,7 @@
 import FollowElement from './FollowElement'
 import FollowPosition from './FollowPosition'
 import FollowDefaults from './FollowDefaults'
+import FollowDebug from "./FollowDebug";
 
 class Follow {
   /**
@@ -41,8 +42,12 @@ class Follow {
    * Get all elements with the given attribute and activate the animation
    */
   public initiate (): void {
+    FollowDebug.addLog(this.defaults, 'follow.js instance is enabled')
+
     const targets: NodeListOf<HTMLElement> = document.querySelectorAll(`[${this.defaults['attribute']}]`)
     targets.forEach(target => this.elements.push(new FollowElement(target, this.defaults)))
+
+    FollowDebug.addLog(this.defaults, `found ${targets.length} element(s) in the instance`)
 
     const context = this
 
@@ -63,6 +68,8 @@ class Follow {
    */
   public destroy (): void {
     this.elements = new Array<FollowElement>()
+
+    FollowDebug.addLog(this.defaults, 'follow.js instance is destroyed')
   }
 
   /**
@@ -71,6 +78,8 @@ class Follow {
   public refresh (): void {
     this.destroy()
     this.initiate()
+
+    FollowDebug.addLog(this.defaults, 'follow.js instance is refreshed')
   }
 
   /**
@@ -86,6 +95,12 @@ class Follow {
 
       // set the additional pixels as css transform translate
       element.setTranslate(additional)
+
+      const current: FollowPosition = new FollowPosition(
+        element.position.x + additional.x,
+        element.position.y + additional.y
+      )
+      FollowDebug.addDot(context.defaults, current)
     }
   }
 
@@ -97,6 +112,8 @@ class Follow {
   private static updateMousePosition (position: FollowPosition, context: any): void {
     context.mouse.x = position.x
     context.mouse.y = position.y
+
+    FollowDebug.addDot(context.defaults, context.mouse)
   }
 
   /**
@@ -107,6 +124,8 @@ class Follow {
   private static updateScrollPosition (position: FollowPosition, context: any): void {
     context.scroll.x = position.x
     context.scroll.y = position.y
+
+    FollowDebug.addLog(context.defaults, `scroll event: x: ${context.scroll.x}, y: ${context.scroll.y}`)
   }
 
   /**

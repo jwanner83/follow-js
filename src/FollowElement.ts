@@ -1,5 +1,6 @@
 import FollowPosition from './FollowPosition'
 import FollowDefaults from './FollowDefaults'
+import FollowDebug from "./FollowDebug";
 
 export default class FollowElement {
   /**
@@ -27,6 +28,12 @@ export default class FollowElement {
   public translate: string
 
   /**
+   * The defaults of the follow instances
+   * @type {string}
+   */
+  public defaults: FollowDefaults
+
+  /**
    * Constructor
    * @param {HTMLElement} target
    * @param {FollowDefaults} defaults
@@ -35,6 +42,9 @@ export default class FollowElement {
     this.target = target
     this.factor = parseInt(target.getAttribute(defaults['attribute'])) || defaults['factor']
     this.position = this.getPosition()
+    this.defaults = defaults
+
+    FollowDebug.addOriginalPosition(defaults, this)
   }
 
   /**
