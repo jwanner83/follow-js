@@ -29,6 +29,7 @@ p, a, div, span {
   text-decoration: none;
   border-radius: 5px;
   font-weight: bold;
+  font-size: 22px;
   transition: 0.2s;
 }
 .btn__icon {
@@ -63,20 +64,21 @@ body {
   width: 600px;
 }
 .heading__title {
-  font-size: 80px;
+  font-size: 100px;
   color: #FFF;
-  margin-bottom: 0;
+  margin: 0;
 }
 .heading__title-inner {
   color: #8F8F8F;
 }
 .heading__description {
   margin-left: 5px;
+  margin-top: 15px;
   color: #757575;
-  font-size: 25px;
+  font-size: 35px;
   font-weight: bold;
   font-style: italic;
-  width: 400px;
+  width: 550px;
 }
 
 [data-follow] {

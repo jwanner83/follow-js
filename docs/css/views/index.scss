@@ -12,9 +12,9 @@ body {
   width: 600px;
 
   &__title {
-    font-size: 80px;
-    color: $heading-color;
-    margin-bottom: 0;
+    font-size: 100px;
+    color: #FFF;
+    margin: 0;
 
     &-inner {
       color: $grey;
@@ -23,11 +23,12 @@ body {
 
   &__description {
     margin-left: 5px;
+    margin-top: 15px;
     color: #757575;
-    font-size: 25px;
+    font-size: 35px;
     font-weight: bold;
     font-style: italic;
-    width: 400px;
+    width: 550px;
   }
 }
 

@@ -32,11 +32,13 @@
                 follow<span class="header__inner">.js</span>
             </h1>
         </div>
-        <h1>Getting started</h1>
-        <h2>Include script</h2>
-        <h2>Initialization</h2>
-        <h2>Add elements</h2>
-        <h2>Basic example</h2>
+        <h1><a href="#getting-started">Getting started</a></h1>
+        <h2><a href="#include-script">Include script</a></h2>
+        <h2><a href="#add-elements">Add elements</a></h2>
+        <h2><a href="#initialization">Initialization</a></h2>
+        <h2><a href="#basic-example">Basic example</a></h2>
+
+        <h1><a href="#examples">Examples</a></h1>
     </div>
 </nav>
 <main class="content">
@@ -44,15 +46,21 @@
         <h1>Guide</h1>
         <p><b>follow.js</b> is an experimental, dependency free script that let elements follow your cursor without a huge overhead.</p>
 
-        <h2>Getting started</h2>
-        <h3>Include script</h3>
+        <h2 id="getting-started">Getting started</h2>
+        <h3 id="include-script">Include script</h3>
         <p>You can do this through <a href="https://www.npmjs.com/package/follow-js">npm</a> <code>npm i -s follow-js</code> or download the <code>follow.min.js</code> file and include it in your html.</p>
         <code>
             &lt;script src="follow.min.js"&gt;&lt;/script&gt;
         </code>
         <p>Otherwise you have the option to use it with unpkg, jsdeliver, skypack or similar services.</p>
 
-        <h3>Initialization</h3>
+        <h3 id="add-elements">Add elements</h3>
+        <p>To create an element which follows the cursor, you now have to add the `data-follow` attribute (the name of the attribute can be changed through the options) to any tag you want.</p>
+        <code>
+            &lt;div class="element" data-follow&gt; ... &lt;/div&gt;
+        </code>
+
+        <h3 id="initialization">Initialization</h3>
         <p>After you included the script in your application, you have to initialize follow.js. This can be done automatically, if you included it via script tag and add the <code>data-follow-auto</code> attribute to it</p>
         <code>
             &lt;script src="follow.min.js" data-follow-auto&gt;&lt;/script&gt;
@@ -62,19 +70,17 @@
             const follow = new Follow()
         </code>
 
-        <h3>Add elements</h3>
-        <p>To create an element which follows the cursor, you now have to add the `data-follow` attribute (the name of the attribute can be changed through the options) to any tag you want.</p>
-        <code>
-            &lt;div class="element" data-follow&gt; ... &lt;/div&gt;
-        </code>
-
-        <h3 class="no-margin-bottom">Basic Example</h3>
+        <h3 class="no-margin-bottom" id="basic-example">Basic Example</h3>
         <script async src="//jsfiddle.net/jonaswanner/oc852k1e/11/embed/result,html,css/dark/"></script>
+
+        <h2 id="examples">Examples</h2>
+        <h3></h3>
     </div>
 
     <!-- <div class="content__item" data-follow="100"></div> -->
 </main>
 
 <script src="https://unpkg.com/follow-js/dist/follow.min.js" data-follow-auto></script>
+<script src="js/code.js"></script>
 </body>
 </html>
