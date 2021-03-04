@@ -89,8 +89,8 @@ class Follow {
   private static animate (context: any): void {
     for (const element of context.elements) {
       const additional: FollowPosition = new FollowPosition(
-        parseFloat(((context.mouse.x + context.scroll.x - element.position.x) / element.factor).toString()),
-        parseFloat(((context.mouse.y + context.scroll.y - element.position.y) / element.factor).toString())
+        Math.round((context.mouse.x + context.scroll.x - element.position.x) / element.factor),
+        Math.round((context.mouse.y + context.scroll.y - element.position.y) / element.factor)
       )
 
       // set the additional pixels as css transform translate
