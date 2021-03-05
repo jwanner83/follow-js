@@ -54,7 +54,7 @@ p, a, div, span {
 
 body {
   display: grid;
-  grid-template-columns: minmax(275px, 1fr) 5fr;
+  grid-template-columns: minmax(320px, 1fr) 5fr;
   background: #000;
 }
 
@@ -86,7 +86,7 @@ body {
   color: #FFF;
 }
 .navigation h1 {
-  margin: 6px 0;
+  margin: 24px 0 6px;
 }
 .navigation h2 {
   margin: 10px 0;
@@ -95,19 +95,9 @@ body {
 }
 
 .content {
-  overflow: auto;
+  overflow: hidden auto;
   position: relative;
   background-color: #0b0b0b;
-}
-.content__item {
-  background: #AC0000;
-  position: absolute;
-  top: 200px;
-  left: 100px;
-  height: 500px;
-  width: 500px;
-  filter: blur(40px);
-  z-index: 1;
 }
 .content__inner {
   position: relative;
@@ -124,7 +114,7 @@ body {
 }
 .content h2 {
   font-size: 35px;
-  padding-top: 60px;
+  padding-top: 90px;
   margin-top: 0;
 }
 .content h3 {
@@ -136,7 +126,7 @@ body {
 .content p, .content code, .content a {
   font-size: 20px;
 }
-.content p code {
+.content p code, .content td code {
   display: inline-block;
   padding: 4px 6px;
 }
@@ -146,10 +136,102 @@ body {
   border-radius: 3px;
   display: block;
 }
-.content iframe {
+.content .iframe__container {
   height: 400px;
   width: calc(100% + 120px);
-  margin: 30px -60px;
+  margin: 30px -60px 10px;
+  background: #20262e;
+}
+.content iframe {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+.content table {
+  margin-top: 20px;
+}
+.content table tr th, .content table tr td {
+  text-align: left;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid rgba(208, 208, 208, 0.2);
+}
+.content table tr th p, .content table tr td p {
+  margin: 0;
+}
+.content table tr th:first-child, .content table tr td:first-child {
+  min-width: 100px;
+}
+.content table tr th:last-child, .content table tr td:last-child {
+  min-width: 150px;
+}
+.content table tr th {
+  padding-bottom: 15px;
+}
+.content table tr th p {
+  color: #FFF;
+}
+.content table tr td p {
+  padding: 6px 0;
+}
+
+.follow {
+  position: absolute;
+  transition: 100ms all linear 0s;
+}
+.follow--1 {
+  top: -100px;
+  left: -150px;
+}
+.follow--1 .follow__item {
+  background: #AC0000;
+  height: 500px;
+  width: 500px;
+  filter: blur(100px);
+  z-index: 1;
+  border-radius: 50px;
+  transform: rotate(50deg);
+  opacity: 0.5;
+}
+.follow--2 {
+  top: 130%;
+  left: 60%;
+}
+.follow--2 .follow__item {
+  background: #AC0000;
+  height: 700px;
+  width: 700px;
+  filter: blur(100px);
+  z-index: 1;
+  border-radius: 100%;
+  opacity: 0.3;
+}
+.follow--3 {
+  top: 220%;
+  left: 10%;
+}
+.follow--3 .follow__item {
+  background: #AC0000;
+  height: 200px;
+  width: 400px;
+  filter: blur(100px);
+  z-index: 1;
+  border-radius: 40px;
+  transform: rotate(20deg);
+  opacity: 0.6;
+}
+.follow--4 {
+  top: 340%;
+  left: 60%;
+}
+.follow--4 .follow__item {
+  background: #AC0000;
+  height: 400px;
+  width: 400px;
+  filter: blur(100px);
+  z-index: 1;
+  border-radius: 40px;
+  opacity: 0.4;
 }
 
 /*# sourceMappingURL=guide.css.map */

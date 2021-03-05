@@ -12,7 +12,6 @@ function isInViewport(element) {
   )
 }
 
-
 function handleNavigation () {
   let active
   const contents = document.querySelectorAll('.content h2, .content h3, .content h4, .content h5, .content h6')
@@ -23,6 +22,8 @@ function handleNavigation () {
       break
     }
   }
+
+  history.replaceState(null, null, location.pathname + '#' + active.getAttribute('id'))
 
   const navigationItems = document.querySelectorAll('.navigation a')
 
