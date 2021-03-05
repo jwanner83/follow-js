@@ -1,0 +1,40 @@
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 120px;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 22px;
+  transition: 0.2s;
+
+  &__icon {
+    margin-left: 8px;
+  }
+
+  &--primary {
+    color: white;
+    background: $primary;
+    margin-left: 6px;
+  }
+
+  &--secondary {
+    color: black;
+    background: white;
+    margin-left: 15px;
+  }
+
+  &--no-margin-left {
+    margin-left: 0;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}

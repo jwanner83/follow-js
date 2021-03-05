@@ -1,0 +1,276 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, div, span, html, body {
+  font-family: "Century Gothic", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #FFF;
+}
+
+p, a, div, span {
+  color: #D0D0D0;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 120px;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 22px;
+  transition: 0.2s;
+}
+.btn__icon {
+  margin-left: 8px;
+}
+.btn--primary {
+  color: white;
+  background: #AC0000;
+  margin-left: 6px;
+}
+.btn--secondary {
+  color: black;
+  background: white;
+  margin-left: 15px;
+}
+.btn--no-margin-left {
+  margin-left: 0;
+}
+.btn:hover {
+  opacity: 0.8;
+}
+.btn:active {
+  transform: scale(0.9);
+}
+
+body {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) 5fr;
+  background: #000;
+}
+
+.navigation {
+  overflow: hidden auto;
+}
+.navigation__inner {
+  padding: 40px;
+}
+.navigation__header {
+  padding: 30px 0 50px;
+  border-bottom: 1px solid #2B2B2B;
+  margin-bottom: 30px;
+}
+.navigation__header a {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.navigation__header a svg {
+  margin-right: 6px;
+}
+.navigation__header .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navigation__header .header__title {
+  font-size: 34px;
+  margin: 0;
+}
+.navigation__header .header__inner {
+  color: #8F8F8F;
+}
+.navigation__header .header__version {
+  font-weight: bold;
+  background: white;
+  color: black;
+  padding: 4px 6px;
+  border-radius: 3px;
+}
+.navigation a {
+  text-decoration: none;
+  transition: 0.2s;
+  opacity: 0.6;
+}
+.navigation a:hover {
+  opacity: 0.4;
+}
+.navigation a:active, .navigation a.active {
+  opacity: 1;
+  color: #FFF;
+}
+.navigation h1 {
+  margin: 24px 0 6px;
+}
+.navigation h2 {
+  margin: 10px 0;
+  font-size: 20px;
+  color: #ddd;
+}
+
+.content {
+  overflow: hidden auto;
+  position: relative;
+  background-color: #0b0b0b;
+}
+.content__inner {
+  position: relative;
+  padding: 100px 90px;
+  max-width: 1000px;
+  margin: 0 auto;
+  z-index: 2;
+}
+.content h1.no-margin-bottom, .content h2.no-margin-bottom, .content h3.no-margin-bottom, .content h4.no-margin-bottom {
+  margin-bottom: 0;
+}
+.content h1 {
+  font-size: 45px;
+}
+.content h2 {
+  font-size: 35px;
+  padding-top: 90px;
+  margin-top: 0;
+}
+.content h3 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  margin-top: 0;
+  padding-top: 40px;
+}
+.content p, .content code, .content a {
+  font-size: 20px;
+}
+.content p code, .content td code {
+  display: inline-block;
+  padding: 4px 6px;
+}
+.content code {
+  background: #3336;
+  padding: 12px 15px;
+  border-radius: 3px;
+  display: block;
+}
+.content .iframe__container {
+  height: 400px;
+  width: calc(100% + 120px);
+  margin: 30px -60px 10px;
+  background: #20262e;
+}
+.content iframe {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+.content table {
+  margin-top: 20px;
+}
+.content table tr th, .content table tr td {
+  text-align: left;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid rgba(208, 208, 208, 0.2);
+}
+.content table tr th p, .content table tr td p {
+  margin: 0;
+}
+.content table tr th:first-child, .content table tr td:first-child {
+  min-width: 100px;
+}
+.content table tr th:last-child, .content table tr td:last-child {
+  min-width: 150px;
+}
+.content table tr th {
+  padding-bottom: 15px;
+}
+.content table tr th p {
+  color: #FFF;
+}
+.content table tr td p {
+  padding: 6px 0;
+}
+
+.follow {
+  position: absolute;
+  transition: 100ms all linear 0s;
+}
+.follow--1 {
+  top: -100px;
+  left: -150px;
+}
+.follow--1 .follow__item {
+  background: #AC0000;
+  height: 500px;
+  width: 500px;
+  filter: blur(100px);
+  z-index: 1;
+  border-radius: 50px;
+  transform: rotate(50deg);
+  opacity: 0.5;
+}
+.follow--2 {
+  top: 130%;
+  left: 60%;
+}
+.follow--2 .follow__item {
+  background: #AC0000;
+  height: 700px;
+  width: 700px;
+  filter: blur(100px);
+  z-index: 1;
+  border-radius: 100%;
+  opacity: 0.3;
+}
+.follow--3 {
+  top: 220%;
+  left: 10%;
+}
+.follow--3 .follow__item {
+  background: #AC0000;
+  height: 200px;
+  width: 400px;
+  filter: blur(100px);
+  z-index: 1;
+  border-radius: 40px;
+  transform: rotate(20deg);
+  opacity: 0.8;
+}
+.follow--4 {
+  top: 340%;
+  left: 60%;
+}
+.follow--4 .follow__item {
+  background: #AC0000;
+  height: 400px;
+  width: 400px;
+  filter: blur(100px);
+  z-index: 1;
+  border-radius: 40px;
+  opacity: 0.4;
+}
+.follow--5 {
+  top: 450%;
+  left: 10%;
+}
+.follow--5 .follow__item {
+  background: #AC0000;
+  height: 600px;
+  width: 600px;
+  filter: blur(100px);
+  z-index: 1;
+  border-radius: 100%;
+  opacity: 0.6;
+}
+
+/*# sourceMappingURL=guide.css.map */

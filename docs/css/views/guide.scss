@@ -1,0 +1,268 @@
+@import "../general/main";
+
+body {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) 5fr;
+  background: $background-color;
+}
+
+.navigation {
+  overflow: hidden auto;
+
+  &__inner {
+    padding: 40px;
+  }
+
+  &__header {
+    padding: 30px 0 50px;
+    border-bottom: 1px solid $light;
+    margin-bottom: 30px;
+
+    a {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+
+      svg {
+        margin-right: 6px;
+      }
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &__title {
+        font-size: 34px;
+        margin: 0;
+      }
+
+      &__inner {
+        color: $grey;
+      }
+
+      &__version {
+        font-weight: bold;
+        background: white;
+        color: black;
+        padding: 4px 6px;
+        border-radius: 3px;
+      }
+    }
+  }
+
+  a {
+    text-decoration: none;
+    transition: 0.2s;
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 0.4;
+    }
+
+    &:active, &.active {
+      opacity: 1;
+      color: #FFF;
+    }
+  }
+
+  h1 {
+    margin: 24px 0 6px;
+  }
+
+  h2 {
+    margin: 10px 0;
+    font-size: 20px;
+    color: #ddd;
+  }
+}
+
+.content {
+  overflow: hidden auto;
+  position: relative;
+  background-color: $background-color-lighter;
+
+  &__inner {
+    position: relative;
+    padding: 100px 90px;
+    max-width: 1000px;
+    margin: 0 auto;
+    z-index: 2;
+  }
+
+  h1, h2, h3, h4 {
+    &.no-margin-bottom {
+      margin-bottom: 0;
+    }
+  }
+
+  h1 {
+    font-size: 45px;
+  }
+
+  h2 {
+    font-size: 35px;
+    padding-top: 90px;
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    margin-top: 0;
+    padding-top: 40px;
+  }
+
+  p, code, a {
+    font-size: 20px;
+  }
+
+  p, td {
+    code {
+      display: inline-block;
+      padding: 4px 6px;
+    }
+  }
+
+  code {
+    background: #3336;
+    padding: 12px 15px;
+    border-radius: 3px;
+    display: block;
+  }
+
+  .iframe__container {
+    height: 400px;
+    width: calc(100% + 120px);
+    margin: 30px -60px 10px;
+    background: #20262e;
+  }
+
+  iframe {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+  }
+
+  table {
+    margin-top: 20px;
+
+    tr {
+      th, td {
+        text-align: left;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid rgba($paragraph-color, 0.2);
+
+        p {
+          margin: 0;
+        }
+
+        &:first-child {
+          min-width: 100px;
+        }
+
+        &:last-child {
+          min-width: 150px;
+        }
+      }
+
+      th {
+        padding-bottom: 15px;
+
+        p {
+          color: $heading-color;
+        }
+      }
+
+      td {
+        p {
+          padding: 6px 0;
+        }
+      }
+    }
+  }
+}
+
+.follow {
+  position: absolute;
+  transition: 100ms all linear 0s;
+
+  &--1 {
+    top: -100px;
+    left: -150px;
+
+    .follow__item {
+      background: $primary;
+      height: 500px;
+      width: 500px;
+      filter: blur(100px);
+      z-index: 1;
+      border-radius: 50px;
+      transform: rotate(50deg);
+      opacity: 0.5;
+    }
+  }
+
+  &--2 {
+    top: 130%;
+    left: 60%;
+
+    .follow__item {
+      background: $primary;
+      height: 700px;
+      width: 700px;
+      filter: blur(100px);
+      z-index: 1;
+      border-radius: 100%;
+      opacity: 0.3;
+    }
+  }
+
+  &--3 {
+    top: 220%;
+    left: 10%;
+
+    .follow__item {
+      background: $primary;
+      height: 200px;
+      width: 400px;
+      filter: blur(100px);
+      z-index: 1;
+      border-radius: 40px;
+      transform: rotate(20deg);
+      opacity: 0.8;
+    }
+  }
+
+  &--4 {
+    top: 340%;
+    left: 60%;
+
+    .follow__item {
+      background: $primary;
+      height: 400px;
+      width: 400px;
+      filter: blur(100px);
+      z-index: 1;
+      border-radius: 40px;
+      opacity: 0.4;
+    }
+  }
+
+  &--5 {
+    top: 450%;
+    left: 10%;
+
+    .follow__item {
+      background: $primary;
+      height: 600px;
+      width: 600px;
+      filter: blur(100px);
+      z-index: 1;
+      border-radius: 100%;
+      opacity: 0.6;
+    }
+  }
+}

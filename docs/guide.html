@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Primary Meta Tags -->
+    <title>Documentation - follow.js - Let elements follow your cursor with literally no effort.</title>
+    <meta name="title" content="follow.js - Let elements follow your cursor with literally no effort.">
+    <meta name="description"
+          content="With follow.js you can create simple and complex animations based on your mouse interaction with the web page.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jwanner83.github.io/follow-js/">
+    <meta property="og:title" content="follow.js - Let elements follow your cursor with literally no effort.">
+    <meta property="og:description"
+          content="With follow.js you can create simple and complex animations based on your mouse interaction with the web page.">
+    <meta property="og:image" content="assets/social.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://jwanner83.github.io/follow-js/">
+    <meta property="twitter:title" content="follow.js - Let elements follow your cursor with literally no effort.">
+    <meta property="twitter:description"
+          content="With follow.js you can create simple and complex animations based on your mouse interaction with the web page.">
+    <meta property="twitter:image" content="assets/social.png">
+
+    <link rel="stylesheet" href="css/views/guide.css"/>
+</head>
+<body>
+<nav class="navigation">
+    <div class="navigation__inner">
+        <div class="navigation__header">
+            <a href="index.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+                Back
+            </a>
+            <div class="header">
+                <h1 class="header__title">follow<span class="header__inner">.js</span></h1>
+                <div class="header__version">v2.2.0</div>
+            </div>
+        </div>
+
+        <h1><a href="#getting-started">Getting started</a></h1>
+        <h2><a href="#include-script">Include script</a></h2>
+        <h2><a href="#add-elements">Add elements</a></h2>
+        <h2><a href="#initialization">Initialization</a></h2>
+        <h2><a href="#basic-example">Basic example</a></h2>
+
+        <h1><a href="#options">Options</a></h1>
+        <h2><a href="#available-options">Available options</a></h2>
+
+        <h1><a href="#methods">Methods</a></h1>
+        <h2><a href="#available-methods">Available methods</a></h2>
+
+        <h1><a href="#examples">Examples</a></h1>
+        <h2><a href="#smooth-example">Smooth example</a></h2>
+        <h2><a href="#inverted-example">Inverted example</a></h2>
+        <h2><a href="#exact-example">Exact example</a></h2>
+        <h2><a href="#debugging-example">Debugging example</a></h2>
+
+        <h1><a href="#featured-projects">Featured projects</a></h1>
+
+        <h1><a href="#links">Links</a></h1>
+        <h2><a href="#issues">Issues / Questions</a></h2>
+
+        <h1><a href="#contributions">Contributions</a></h1>
+
+        <h1><a href="#version-history">Version history</a></h1>
+    </div>
+</nav>
+<main class="content">
+    <div class="content__inner">
+        <h1>Documentation</h1>
+        <p><b>follow.js</b> is an experimental, dependency free script that let elements follow your cursor without a
+            huge overhead.</p>
+
+        <h2 id="getting-started">Getting started</h2>
+        <h3 id="include-script">Include script</h3>
+        <p>
+            You can do this through <a href="https://www.npmjs.com/package/follow-js">npm</a> <code>npm i -s
+            follow-js</code> or download the <code>follow.min.js</code> file and include it in your html.
+        </p>
+
+        <code>
+            &lt;script src="follow.min.js"&gt;&lt;/script&gt;
+        </code>
+
+        <p>Otherwise, you have the option to use it with unpkg, jsdeliver, skypack or similar services.</p>
+
+        <h3 id="add-elements">Add elements</h3>
+        <p>
+            To create an element which follows the cursor, you now have to add the `data-follow` attribute (the name of
+            the attribute can be changed through the options) to any tag you want.</p>
+
+        <code>
+            &lt;div data-follow&gt; ... &lt;/div&gt;
+        </code>
+
+        <h3 id="initialization">Initialization</h3>
+        <p>
+            After you included the script in your application, you have to initialize follow.js. This can be done
+            automatically, if you included it via script tag and add the <code>data-follow-auto</code> attribute to it
+        </p>
+
+        <code>
+            &lt;script src="follow.min.js" data-follow-auto&gt;&lt;/script&gt;
+        </code>
+
+        <p>or manually through js.</p>
+
+        <code>
+            const follow = new Follow()
+        </code>
+
+        <h3 class="no-margin-bottom" id="basic-example">Basic Example</h3>
+        <div class="iframe__container">
+            <script async src="//jsfiddle.net/jonaswanner/oc852k1e/11/embed/result,html,css/dark/"></script>
+        </div>
+
+        <h2 id="options">Options</h2>
+        <p>
+            You have the possibility to define or override the default options of an instance, according to your needs.
+            To do so, you have to pass an object with the wanted options in it to the constructor as following:
+        </p>
+
+        <code>
+            const follow = new Follow({<br>
+            &emsp;&emsp;debug: true,<br>
+            &emsp;&emsp;factor: 50,<br>
+            &emsp;&emsp;attribute: 'follow',<br>
+            &emsp;&emsp;initiate: false<br>
+            })
+        </code>
+
+        <h3 id="available-options">Available options</h3>
+        <table>
+            <thead>
+            <tr>
+                <th><p>Option</p></th>
+                <th><p>Description</p></th>
+                <th><p>Default value</p></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><p>debug</p></td>
+                <td>
+                    <p>
+                        Adds console log to the script and as well some visual helpers like the position of the mouse as
+                        well as the origin location of an object...
+                    </p>
+                </td>
+                <td>
+                    <code>false</code>
+                </td>
+            </tr>
+            <tr>
+                <td><p>factor</p></td>
+                <td>
+                    <p>The default factor of elements who doesn't define it explicitly with an own factor</p>
+                </td>
+                <td>
+                    <code>10</code>
+                </td>
+            </tr>
+            <tr>
+                <td><p>attribute</p></td>
+                <td>
+                    <p>The attribute which is used to get all elements which should follow the cursor.</p>
+                </td>
+                <td>
+                    <code>data-follow</code>
+                </td>
+            </tr>
+            <tr>
+                <td><p>initiate</p></td>
+                <td>
+                    <p>
+                        If the script should automatically start with the following elements after creating a new
+                        instance. If this is set to false, you have to initiate the instance by your own through the
+                        <code>initiate</code> method.
+                    </p>
+                </td>
+                <td>
+                    <code>true</code>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2 id="methods">Methods</h2>
+        <p>
+            After you initialized a new follow instance, you have multiple methods available. You can call them on your
+            instance as following:
+        </p>
+
+        <code>
+            const follow = new Follow()<br>
+            follow.destroy()
+        </code>
+
+
+        <h3 id="available-methods">Available methods</h3>
+        <table>
+            <thead>
+            <tr>
+                <th><p>Method</p></th>
+                <th><p>Description</p></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><p>initiate</p></td>
+                <td>
+                    <p>Initiate the script, get all elements which will follow the cursor and start following.</p>
+                </td>
+            </tr>
+            <tr>
+                <td><p>destroy</p></td>
+                <td>
+                    <p>Stop all following and calculating.</p>
+                </td>
+            </tr>
+            <tr>
+                <td><p>refresh</p></td>
+                <td>
+                    <p>
+                        Restart the instance. This method first calls the <code>destroy</code> and after that the
+                        <code>initiate</code> method.
+                    </p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2 id="examples">Examples</h2>
+        <h3 id="smooth-example">Smooth example</h3>
+        <p>
+            To make sure the animations are smooth, you have to add a transition to the element that you want to follow.
+            We always use a linear transition to make sure, it doesn't jump around or has some other side effects.
+        </p>
+
+        <code>
+            transition: 100ms all linear 0s;
+        </code>
+
+        <div class="iframe__container">
+            <script async src="//jsfiddle.net/jonaswanner/8cw5fbq9/3/embed/result,html,css/dark/"></script>
+        </div>
+
+        <h3 id="inverted-example">Inverted example</h3>
+        <p>
+            Because this script uses basic math, it is possible to set a number as factor which is below zero. This
+            leads to fancy looking stuff.
+        </p>
+
+        <code>
+            &lt;div data-follow="-5"&gt; ... &lt;/div&gt;
+        </code>
+
+        <div class="iframe__container">
+            <script async src="//jsfiddle.net/jonaswanner/4poxb2rw/13/embed/result,html,css/dark/"></script>
+        </div>
+
+        <h3 id="exact-example">Exact example</h3>
+        <p>
+            We can also set 1 as our factor on an element which leads to an element which is exactly at our cursor ...
+            all the time ... which can be used either as custom cursor or if you want that your user accepts cookies
+            for example (because of legal reasons not recommended, but would be funny :)
+        </p>
+
+        <code>
+            &lt;div data-follow="1"&gt; ... &lt;/div&gt;
+        </code>
+
+        <div class="iframe__container">
+            <script async src="//jsfiddle.net/jonaswanner/j27uqso3/8/embed/result,html,css/dark/"></script>
+        </div>
+
+        <h3 id="debugging-example">Debugging example</h3>
+        <p>
+            Just wanted to show what the debug mode is doing, which is really useful to develop this script.
+        </p>
+
+        <code>
+            const follow = new Follow({<br>
+            &emsp;&emsp;debug: true<br>
+            })
+        </code>
+
+        <div class="iframe__container">
+            <script async src="//jsfiddle.net/jonaswanner/hL5xquws/7/embed/result,js,html,css/dark/"></script>
+        </div>
+
+        <h2 id="featured-projects">Featured projects</h2>
+        <p>
+            If you want your project that you've done with the follow.js Script to be featured on this page, please open
+            an issue with the link to the project and a short description.
+        </p>
+
+        <h2 id="links">Links</h2>
+        <p>follow.js is opensource. You can find the source code on Github, and the distributed version on npm.</p>
+        <a class="btn btn--secondary btn--no-margin-left" href="https://github.com/jwanner83/follow-js" target="_blank">
+            Github
+        </a>
+        <a class="btn btn--primary" href="https://www.npmjs.com/package/follow-js" target="_blank">npm</a>
+
+        <h3 id="issues">Issues / Questions</h3>
+        <p>
+            If you have any issues or questions with the script, you can open an issue on Github or click on the button
+            below.
+        </p>
+        <a class="btn btn--secondary btn--no-margin-left" href="https://github.com/jwanner83/follow-js/issues/new"
+           target="_blank">
+            Open an issue
+        </a>
+
+        <h2 id="contributions">Contributions</h2>
+        <p>
+            Any contributions are welcome. Please fork the project and develop with small, focused commits so its easier
+            for the reviewer to understand what you've done. After you're done with development, create a pull request to
+            the development branch. We'll then have a look at the code and give you feedback.
+        </p>
+
+        <h2 id="version-history">Version history</h2>
+        <table>
+            <thead>
+            <tr>
+                <th><p>Version</p></th>
+                <th><p>Description</p></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><p>2.2.0</p></td>
+                <td>
+                    <p>
+                        - Adding debug mode to script<br>
+                        - Change initialization with options<br>
+                        - Rename FollowDefaults to FollowOptions<br>
+                        - Fixing error with multiple elements
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><p>2.1.3</p></td>
+                <td>
+                    <p>Split TypeScript classes into separate files and change bundler to rollup</p>
+                </td>
+            </tr>
+            <tr>
+                <td><p>2.1.2</p></td>
+                <td>
+                    <p>
+                        Fixing readme version number
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><p>2.1.1</p></td>
+                <td>
+                    <p>
+                        - Fixing scroll bug to enable custom cursor<br>
+                        - Adding custom scroll and cursor example
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><p>2.1.0</p></td>
+                <td>
+                    <p>
+                        Complete rewrite with TypeScript and classes
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><p>2.0.0</p></td>
+                <td>
+                    <p>
+                        Complete rewrite with the css transform property instead of cloned position absolute elements
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><p>1.0.0</p></td>
+                <td>
+                    <p>
+                        Initial version
+                    </p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="follow follow--1" data-follow="10">
+        <div class="follow__item"></div>
+    </div>
+    <div class="follow follow--2" data-follow="15">
+        <div class="follow__item"></div>
+    </div>
+    <div class="follow follow--3" data-follow="5">
+        <div class="follow__item"></div>
+    </div>
+    <div class="follow follow--4" data-follow="20">
+        <div class="follow__item"></div>
+    </div>
+    <div class="follow follow--5" data-follow="20">
+        <div class="follow__item"></div>
+    </div>
+</main>
+
+<script src="../dist/follow.min.js" data-follow-auto></script>
+<script src="js/code.js"></script>
+</body>
+</html>

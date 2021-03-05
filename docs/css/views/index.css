@@ -1,0 +1,112 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, div, span, html, body {
+  font-family: "Century Gothic", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #FFF;
+}
+
+p, a, div, span {
+  color: #D0D0D0;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 120px;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 22px;
+  transition: 0.2s;
+}
+.btn__icon {
+  margin-left: 8px;
+}
+.btn--primary {
+  color: white;
+  background: #AC0000;
+  margin-left: 6px;
+}
+.btn--secondary {
+  color: black;
+  background: white;
+  margin-left: 15px;
+}
+.btn--no-margin-left {
+  margin-left: 0;
+}
+.btn:hover {
+  opacity: 0.8;
+}
+.btn:active {
+  transform: scale(0.9);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #000;
+}
+
+.heading {
+  width: 600px;
+}
+.heading__title {
+  font-size: 100px;
+  color: #FFF;
+  margin: 0;
+}
+.heading__title-inner {
+  color: #8F8F8F;
+}
+.heading__description {
+  margin-left: 5px;
+  margin-top: 15px;
+  color: #757575;
+  font-size: 35px;
+  font-weight: bold;
+  font-style: italic;
+  width: 550px;
+}
+
+[data-follow] {
+  transition: 100ms all linear 0s;
+}
+
+.follow__background {
+  position: absolute;
+  height: 500px;
+  width: 500px;
+  background: linear-gradient(#AC0000 0%, #000000 100%);
+  right: 0;
+  bottom: 0;
+  margin: 0 -100px -100px 0;
+  border-radius: 100%;
+}
+.follow__foreground {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #3A3A3A 100%);
+  right: 150px;
+  bottom: 100px;
+  border-radius: 100%;
+  box-shadow: 12px 15px 28px rgba(0, 0, 0, 0.23);
+}
+
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,61 @@
+@import "../general/main";
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: $background-color;
+}
+
+.heading {
+  width: 600px;
+
+  &__title {
+    font-size: 100px;
+    color: #FFF;
+    margin: 0;
+
+    &-inner {
+      color: $grey;
+    }
+  }
+
+  &__description {
+    margin-left: 5px;
+    margin-top: 15px;
+    color: #757575;
+    font-size: 35px;
+    font-weight: bold;
+    font-style: italic;
+    width: 550px;
+  }
+}
+
+[data-follow] {
+  transition: 100ms all linear 0s;
+}
+
+.follow {
+  &__background {
+    position: absolute;
+    height: 500px;
+    width: 500px;
+    background: $primary-gradient;
+    right: 0;
+    bottom: 0;
+    margin: 0 -100px -100px 0;
+    border-radius: 100%;
+  }
+
+  &__foreground {
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    background: $secondary-gradient;
+    right: 150px;
+    bottom: 100px;
+    border-radius: 100%;
+    box-shadow: 12px 15px 28px rgba(0, 0, 0, 0.23);
+  }
+}

@@ -1,7 +1,7 @@
 {
   "name": "follow-js",
-  "version": "2.1.3",
-  "description": "let elements follow your cursor",
+  "version": "2.2.0",
+  "description": "let elements follow your cursor.",
   "main": "dist/follow.min.js",
   "repository": {
     "type": "git",
@@ -20,15 +20,17 @@
   "bugs": {
     "url": "https://github.com/jwanner83/follow-js/issues"
   },
-  "homepage": "https://github.com/jwanner83/follow-js#readme",
+  "homepage": "https://jwanner83.github.io/follow-js/",
   "devDependencies": {
-    "rollup": "^2.28.1",
     "@rollup/plugin-typescript": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
+    "rollup": "^2.28.1",
     "tslib": "^2.0.1",
     "typescript": "^4.0.3"
   },
   "scripts": {
-    "build": "rollup src/Follow.ts --file dist/follow.min.js --format cjs --compact --exports named -p @rollup/plugin-typescript"
-  },
-  "dependencies": {}
+    "build": "rollup src/Follow.ts --file dist/follow.min.js --format cjs --compact --exports named -p @rollup/plugin-typescript",
+    "watch": "rollup src/Follow.ts --file dist/follow.min.js --format cjs --compact --exports named -p @rollup/plugin-typescript --watch"
+  }
 }
