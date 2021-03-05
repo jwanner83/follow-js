@@ -88,9 +88,11 @@ class Follow {
    */
   public setOptions (options: any): void {
     if (options) {
+      const customOptions: any = options.default || options
+
       for (const property in this.options) {
-        if (Object.prototype.hasOwnProperty.call(this.options, property) && options[property] !== undefined) {
-          this.options[property] = options[property]
+        if (Object.prototype.hasOwnProperty.call(this.options, property) && customOptions[property] !== undefined) {
+          this.options[property] = customOptions[property]
         }
       }
     }
@@ -110,11 +112,14 @@ class Follow {
       // set the additional pixels as css transform translate
       element.setTranslate(additional)
 
-      const current: FollowPosition = new FollowPosition(
-        element.position.x + additional.x,
-        element.position.y + additional.y
-      )
-      FollowDebug.addDot(context.options, current, 'red')
+      if (context.options.debug) {
+        // prevent unnecessary calculations if debug mode is disabled
+        const current: FollowPosition = new FollowPosition(
+          element.position.x + additional.x,
+          element.position.y + additional.y
+        )
+        FollowDebug.addDot(context.options, current, 'red')
+      }
     }
   }
 
