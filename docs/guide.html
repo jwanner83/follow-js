@@ -31,10 +31,23 @@
 <nav class="navigation">
     <div class="navigation__inner">
         <div class="navigation__header">
+            <a href="index.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+                Back
+            </a>
             <h1 class="header">
                 follow<span class="header__inner">.js</span>
             </h1>
         </div>
+        <h1><a href="#links">Links</a></h1>
+        <h2><a href="#issues">Issues / Questions</a></h2>
+
+        <h1><a href="#contributions">Contributions</a></h1>
+
         <h1><a href="#getting-started">Getting started</a></h1>
         <h2><a href="#include-script">Include script</a></h2>
         <h2><a href="#add-elements">Add elements</a></h2>
@@ -48,10 +61,12 @@
         <h2><a href="#available-methods">Available methods</a></h2>
 
         <h1><a href="#examples">Examples</a></h1>
-        <h2><a href="#exact-example">Exact example</a></h2>
         <h2><a href="#smooth-example">Smooth example</a></h2>
         <h2><a href="#inverted-example">Inverted example</a></h2>
+        <h2><a href="#exact-example">Exact example</a></h2>
         <h2><a href="#debugging-example">Debugging example</a></h2>
+
+        <h1><a href="#featured-projects">Featured projects</a></h1>
     </div>
 </nav>
 <main class="content">
@@ -59,6 +74,30 @@
         <h1>Guide</h1>
         <p><b>follow.js</b> is an experimental, dependency free script that let elements follow your cursor without a
             huge overhead.</p>
+
+        <h2 id="links">Links</h2>
+        <p>follow.js is opensource. You can find the source code on Github, and the distributed version on npm.</p>
+        <a class="btn btn--secondary btn--no-margin-left" href="https://github.com/jwanner83/follow-js" target="_blank">
+            Github
+        </a>
+        <a class="btn btn--primary" href="https://www.npmjs.com/package/follow-js">npm</a>
+
+        <h3 id="issues">Issues / Questions</h3>
+        <p>
+            If you have any issues or questions with the script, you can open an issue on Github or click on the button
+            below.
+        </p>
+        <a class="btn btn--secondary btn--no-margin-left" href="https://github.com/jwanner83/follow-js/issues/new"
+           target="_blank">
+            Open an issue
+        </a>
+
+        <h2 id="contributions">Contributions</h2>
+        <p>
+            Any contributions are welcome. Please fork the project and develop with small, focused commits so its easier
+            for the reviewer to understand what you've done. After your done with development, create a pull request to
+            the development branch. We'll then have a look at the code and give you feedback.
+        </p>
 
         <h2 id="getting-started">Getting started</h2>
         <h3 id="include-script">Include script</h3>
@@ -277,6 +316,12 @@
         <div class="iframe__container">
             <script async src="//jsfiddle.net/jonaswanner/hL5xquws/7/embed/result,js,html,css/dark/"></script>
         </div>
+
+        <h2 id="featured-projects">Featured projects</h2>
+        <p>
+            If you want your project that you've done with the follow.js Script to be featured on this page, please open
+            an issue with the link to the project and a short description.
+        </p>
     </div>
 
     <div class="follow follow--1" data-follow="10">
@@ -289,6 +334,9 @@
         <div class="follow__item"></div>
     </div>
     <div class="follow follow--4" data-follow="20">
+        <div class="follow__item"></div>
+    </div>
+    <div class="follow follow--5" data-follow="20">
         <div class="follow__item"></div>
     </div>
 </main>

@@ -26,6 +26,10 @@
     margin-left: 15px;
   }
 
+  &--no-margin-left {
+    margin-left: 0;
+  }
+
   &:hover {
     opacity: 0.8;
   }

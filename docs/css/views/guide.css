@@ -45,6 +45,9 @@ p, a, div, span {
   background: white;
   margin-left: 15px;
 }
+.btn--no-margin-left {
+  margin-left: 0;
+}
 .btn:hover {
   opacity: 0.8;
 }
@@ -65,6 +68,14 @@ body {
   padding: 30px 0 50px;
   border-bottom: 1px solid #2B2B2B;
   margin-bottom: 30px;
+}
+.navigation__header a {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.navigation__header a svg {
+  margin-right: 6px;
 }
 .navigation__header .header {
   font-size: 34px;
@@ -218,7 +229,7 @@ body {
   z-index: 1;
   border-radius: 40px;
   transform: rotate(20deg);
-  opacity: 0.6;
+  opacity: 0.8;
 }
 .follow--4 {
   top: 340%;
@@ -232,6 +243,19 @@ body {
   z-index: 1;
   border-radius: 40px;
   opacity: 0.4;
+}
+.follow--5 {
+  top: 450%;
+  left: 10%;
+}
+.follow--5 .follow__item {
+  background: #AC0000;
+  height: 600px;
+  width: 600px;
+  filter: blur(100px);
+  z-index: 1;
+  border-radius: 100%;
+  opacity: 0.6;
 }
 
 /*# sourceMappingURL=guide.css.map */

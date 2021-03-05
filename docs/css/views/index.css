@@ -45,6 +45,9 @@ p, a, div, span {
   background: white;
   margin-left: 15px;
 }
+.btn--no-margin-left {
+  margin-left: 0;
+}
 .btn:hover {
   opacity: 0.8;
 }
