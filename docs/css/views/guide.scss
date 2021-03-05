@@ -29,11 +29,25 @@ body {
     }
 
     .header {
-      font-size: 34px;
-      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &__title {
+        font-size: 34px;
+        margin: 0;
+      }
 
       &__inner {
         color: $grey;
+      }
+
+      &__version {
+        font-weight: bold;
+        background: white;
+        color: black;
+        padding: 4px 6px;
+        border-radius: 3px;
       }
     }
   }

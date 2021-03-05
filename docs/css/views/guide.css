@@ -81,11 +81,23 @@ body {
   margin-right: 6px;
 }
 .navigation__header .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navigation__header .header__title {
   font-size: 34px;
   margin: 0;
 }
 .navigation__header .header__inner {
   color: #8F8F8F;
+}
+.navigation__header .header__version {
+  font-weight: bold;
+  background: white;
+  color: black;
+  padding: 4px 6px;
+  border-radius: 3px;
 }
 .navigation a {
   text-decoration: none;
