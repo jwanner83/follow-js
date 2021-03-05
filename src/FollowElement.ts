@@ -1,5 +1,5 @@
 import FollowPosition from './FollowPosition'
-import FollowDefaults from './FollowDefaults'
+import FollowOptions from './FollowOptions'
 import FollowDebug from "./FollowDebug";
 
 export default class FollowElement {
@@ -28,23 +28,23 @@ export default class FollowElement {
   public translate: string
 
   /**
-   * The defaults of the follow instances
+   * The options of the follow instances
    * @type {string}
    */
-  public defaults: FollowDefaults
+  public options: FollowOptions
 
   /**
    * Constructor
    * @param {HTMLElement} target
-   * @param {FollowDefaults} defaults
+   * @param {FollowOptions} options
    */
-  constructor (target: HTMLElement, defaults: FollowDefaults) {
+  constructor (target: HTMLElement, options: FollowOptions) {
     this.target = target
-    this.factor = parseInt(target.getAttribute(defaults['attribute'])) || defaults['factor']
+    this.factor = parseInt(target.getAttribute(options['attribute'])) || options['factor']
     this.position = this.getPosition()
-    this.defaults = defaults
+    this.options = options
 
-    FollowDebug.addOriginalPosition(defaults, this)
+    FollowDebug.addOriginalPosition(options, this)
   }
 
   /**

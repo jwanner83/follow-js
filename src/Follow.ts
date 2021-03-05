@@ -1,14 +1,14 @@
 import FollowElement from './FollowElement'
 import FollowPosition from './FollowPosition'
-import FollowDefaults from './FollowDefaults'
-import FollowDebug from "./FollowDebug";
+import FollowOptions from './FollowOptions'
+import FollowDebug from './FollowDebug'
 
 class Follow {
   /**
    * The options for the follow script
-   * @type {FollowDefaults}
+   * @type {FollowOptions}
    */
-  public defaults: FollowDefaults = new FollowDefaults()
+  public options: FollowOptions = new FollowOptions()
 
   /**
    * Array where all the elements are stored in
@@ -33,8 +33,8 @@ class Follow {
    * @param {object} options
    */
   constructor (options: any = undefined) {
-    this.setDefaults(options)
-    this.defaults.initiate && this.initiate()
+    this.setOptions(options)
+    this.options.initiate && this.initiate()
   }
 
   /**
@@ -42,12 +42,12 @@ class Follow {
    * Get all elements with the given attribute and activate the animation
    */
   public initiate (): void {
-    FollowDebug.addLog(this.defaults, 'follow.js instance is enabled')
+    FollowDebug.addLog(this.options, 'follow.js instance is enabled')
 
-    const targets: NodeListOf<HTMLElement> = document.querySelectorAll(`[${this.defaults['attribute']}]`)
-    targets.forEach(target => this.elements.push(new FollowElement(target, this.defaults)))
+    const targets: NodeListOf<HTMLElement> = document.querySelectorAll(`[${this.options['attribute']}]`)
+    targets.forEach(target => this.elements.push(new FollowElement(target, this.options)))
 
-    FollowDebug.addLog(this.defaults, `found ${targets.length} element(s) in the instance`)
+    FollowDebug.addLog(this.options, `found ${targets.length} element(s) in the instance`)
 
     const context = this
 
@@ -69,7 +69,7 @@ class Follow {
   public destroy (): void {
     this.elements = new Array<FollowElement>()
 
-    FollowDebug.addLog(this.defaults, 'follow.js instance is destroyed')
+    FollowDebug.addLog(this.options, 'follow.js instance is destroyed')
   }
 
   /**
@@ -79,7 +79,21 @@ class Follow {
     this.destroy()
     this.initiate()
 
-    FollowDebug.addLog(this.defaults, 'follow.js instance is refreshed')
+    FollowDebug.addLog(this.options, 'follow.js instance is refreshed')
+  }
+
+  /**
+   * Set FollowOptions if they have been passed in the object initialization
+   * @param {object} options
+   */
+  public setOptions (options: any): void {
+    if (options) {
+      for (const property in this.options) {
+        if (Object.prototype.hasOwnProperty.call(this.options, property) && options[property] !== undefined) {
+          this.options[property] = options[property]
+        }
+      }
+    }
   }
 
   /**
@@ -100,7 +114,7 @@ class Follow {
         element.position.x + additional.x,
         element.position.y + additional.y
       )
-      FollowDebug.addDot(context.defaults, current)
+      FollowDebug.addDot(context.options, current, 'red')
     }
   }
 
@@ -113,7 +127,7 @@ class Follow {
     context.mouse.x = position.x
     context.mouse.y = position.y
 
-    FollowDebug.addDot(context.defaults, context.mouse)
+    FollowDebug.addDot(context.options, context.mouse)
   }
 
   /**
@@ -125,21 +139,7 @@ class Follow {
     context.scroll.x = position.x
     context.scroll.y = position.y
 
-    FollowDebug.addLog(context.defaults, `scroll event: x: ${context.scroll.x}, y: ${context.scroll.y}`)
-  }
-
-  /**
-   * Set FollowOptions if they have been passed in the object initialization
-   * @param {object} options
-   */
-  setDefaults (options: any): void {
-    if (options && options['defaults']) {
-      for (const property in this.defaults) {
-        if (Object.prototype.hasOwnProperty.call(this.defaults, property) && options['defaults'][property] !== undefined) {
-          this.defaults[property] = options['defaults'][property]
-        }
-      }
-    }
+    FollowDebug.addLog(context.options, `scroll event: x: ${context.scroll.x}, y: ${context.scroll.y}`)
   }
 }
 

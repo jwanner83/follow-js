@@ -1,8 +1,8 @@
 /**
- * Object with all the default settings in it.
+ * Object with all the settings in it.
  * The values may be overwritten
  */
-export default class FollowDefaults {
+export default class FollowOptions {
   /**
    * The factor how much the element moves with your cursor
    * @type {number}

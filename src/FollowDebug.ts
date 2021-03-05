@@ -1,6 +1,6 @@
-import FollowPosition from "./FollowPosition";
-import FollowDefaults from "./FollowDefaults";
-import FollowElement from "./FollowElement";
+import FollowPosition from './FollowPosition'
+import FollowOptions from './FollowOptions'
+import FollowElement from './FollowElement'
 
 /**
  * Object with all debug methods
@@ -15,12 +15,12 @@ export default class FollowDebug {
 
   /**
    * Add a dot to the dom
-   * @param defaults
+   * @param options
    * @param {FollowPosition} position
    * @param color
    */
-  public static addDot (defaults: FollowDefaults, position: FollowPosition, color = 'blue'): void {
-    if (!defaults.debug) {
+  public static addDot (options: FollowOptions, position: FollowPosition, color = 'blue'): void {
+    if (!options.debug) {
       return
     }
 
@@ -41,11 +41,11 @@ export default class FollowDebug {
 
   /**
    * Add a dot to the dom for the element
-   * @param {FollowDefaults} defaults
+   * @param {FollowOptions} options
    * @param {FollowElement} element
    */
-  public static addOriginalPosition (defaults: FollowDefaults, element: FollowElement): void {
-    if (!defaults.debug) {
+  public static addOriginalPosition (options: FollowOptions, element: FollowElement): void {
+    if (!options.debug) {
       return
     }
 
@@ -56,18 +56,19 @@ export default class FollowDebug {
     copy.style.left = `${element.position.x - (element.target.offsetHeight / 2)}px`
     copy.style.top = `${element.position.y - (element.target.offsetWidth / 2)}px`
     copy.style.border = '1px solid red'
+    copy.style.background = 'none'
     document.body.append(copy)
   }
 
   /**
    * Add a log message if debug is enabled
-   * @param defaults
+   * @param options
    * @param {string} message
    * @param object
    * @private
    */
-  public static addLog (defaults: FollowDefaults, message: string, object: any = undefined): void {
-    if (!defaults.debug) {
+  public static addLog (options: FollowOptions, message: string, object: any = undefined): void {
+    if (!options.debug) {
       return
     }
 
