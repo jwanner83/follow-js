@@ -41,7 +41,7 @@
             </a>
             <div class="header">
                 <h1 class="header__title">follow<span class="header__inner">.js</span></h1>
-                <div class="header__version">v2.2.0</div>
+                <div class="header__version">v2.2.1</div>
             </div>
         </div>
 
@@ -76,14 +76,28 @@
 <main class="content">
     <div class="content__inner">
         <h1>Documentation</h1>
-        <p><b>follow.js</b> is an experimental, dependency free script that let elements follow your cursor without a
+        <p><b>follow.js</b> is an experimental, dependency free script that lets elements follow your cursor without a
             huge overhead.</p>
 
         <h2 id="getting-started">Getting started</h2>
         <h3 id="include-script">Include script</h3>
         <p>
-            You can do this through <a href="https://www.npmjs.com/package/follow-js">npm</a> <code>npm i -s
-            follow-js</code> or download the <code>follow.min.js</code> file and include it in your html.
+            You can do this through <a href="https://www.npmjs.com/package/follow-js">npm</a> <code>npm i -s follow-js</code> ...
+        </p>
+
+        <code>
+            import Follow from 'follow-js'
+        </code>
+
+        <p>
+            ... with <a href="https://www.skypack.dev/view/follow-js">skypack.dev</a> ...
+        </p>
+
+        <code>
+            import Follow from 'https://cdn.skypack.dev/follow-js'
+        </code>
+        <p>
+            ... or download the <code>follow.min.js</code> file and include it in your html.
         </p>
 
         <code>
@@ -336,6 +350,12 @@
             </tr>
             </thead>
             <tbody>
+            <tr>
+                <td><p>2.2.1</p></td>
+                <td>
+                    <p>Fixing es module support</p>
+                </td>
+            </tr>
             <tr>
                 <td><p>2.2.0</p></td>
                 <td>

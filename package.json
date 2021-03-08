@@ -1,8 +1,13 @@
 {
   "name": "follow-js",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "let elements follow your cursor.",
-  "main": "dist/follow.min.js",
+  "main": "dist/follow.es.min.js",
+  "exports": {
+    "browser": "./dist/follow.min.js",
+    "import": "./dist/follow.es.min.js",
+    "default": "./dist/follow.es.min.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jwanner83/follow-js.git"
@@ -30,7 +35,7 @@
     "typescript": "^4.0.3"
   },
   "scripts": {
-    "build": "rollup src/Follow.ts --file dist/follow.min.js --format cjs --compact --exports named -p @rollup/plugin-typescript",
-    "watch": "rollup src/Follow.ts --file dist/follow.min.js --format cjs --compact --exports named -p @rollup/plugin-typescript --watch"
+    "build": "rollup -c",
+    "watch": "rollup -c --watch"
   }
 }

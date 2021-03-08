@@ -3,7 +3,7 @@ import FollowPosition from './FollowPosition'
 import FollowOptions from './FollowOptions'
 import FollowDebug from './FollowDebug'
 
-class Follow {
+export default class Follow {
   /**
    * The options for the follow script
    * @type {FollowOptions}

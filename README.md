@@ -1,17 +1,26 @@
 # follow.js
-**follow.js** is an experimental, dependency free script that let elements follow your cursor without a huge overhead.
+**follow.js** is an experimental, dependency free script that lets elements follow your cursor without a huge overhead.
 
 ## [Documentation / Examples](https://jwanner83.github.io/follow-js/)
 
 ## Getting started
 ### Include script
-You can do this through [npm](https://www.npmjs.com/package/follow-js) `npm i -s follow-js` or download the `follow.min.js` file and include it in your html.
+You can do this through [npm](https://www.npmjs.com/package/follow-js) `npm i -s follow-js` ...
+````js
+import Follow from 'follow-js'
+````
+... with [skypack.dev](https://www.skypack.dev/view/follow-js) ... 
+````js 
+import Follow from 'https://cdn.skypack.dev/follow-js'
+````
+
+... or download the `follow.min.js` file and include it in your html.
 
 ````html
 <script src="follow.min.js"></script>
 ````
 
-Otherwise, you have the option to use it with unpkg, jsdeliver, skypack or similar services.
+Otherwise, you have the option to use it with unpkg, jsdeliver or similar services.
 
 ### Add elements
 
@@ -104,6 +113,7 @@ the development branch. We'll then have a look at the code and give you feedback
 
 | Version | Description |
 | --- | --- |
+| 2.2.1 | Fixing es module support |
 | 2.2.0 | - Adding debug mode to script<br>- Change initialization with options<br>- Rename FollowDefaults to FollowOptions<br>- Fixing error with multiple elements |
 | 2.1.3 | Split TypeScript classes into separate files and change bundler to rollup |
 | 2.1.2 | Fixing readme version number |
