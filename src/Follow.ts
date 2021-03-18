@@ -17,10 +17,16 @@ export default class Follow {
   public elements: Array<FollowElement> = new Array<FollowElement>()
 
   /**
-   * Position of the Mouse to use to calculate
+   * Position of the pointer (mouse or gyro) to use to calculate
    * @type {FollowPosition}
    */
-  public mouse: FollowPosition = new FollowPosition(0, 0)
+  public pointer: FollowPosition = new FollowPosition(0, 0)
+
+  /**
+   * Because a phone isn't held completely flat, we calculate that the current holding position is in the center
+   * @type {FollowPosition}
+   */
+  public mobileDifference: FollowPosition
 
   /**
    * Current scroll position to use to calculate
@@ -51,22 +57,36 @@ export default class Follow {
 
     const context = this
 
-    document.addEventListener('mousemove', (event: MouseEvent): void => {
-      Follow.updateMousePosition(new FollowPosition(event.clientX, event.clientY), context)
-      Follow.animate(context)
-    })
+    if (this.options.mobile && /Mobi/.test(navigator.userAgent)) {
+      window.addEventListener('deviceorientation', (event: DeviceOrientationEvent): void => {
+        if (!this.mobileDifference) {
+          this.mobileDifference = new FollowPosition(event.gamma, event.beta)
+        }
+
+        // get height of screen
+        const height: number = screen.height
+
+        // get width of screen
+        const width: number = screen.width
+
+        // calculate current orientation position to be in center of screen
+        const x: number = width / 2 + ((this.mobileDifference.x - event.gamma) * this.options.mobileFactor)
+        const y: number = height / 2 + ((this.mobileDifference.y - event.beta) * this.options.mobileFactor)
+
+        Follow.updatePointerPosition(new FollowPosition(x , y), context)
+        Follow.animate(context)
+      })
+    } else {
+      document.addEventListener('mousemove', (event: MouseEvent): void => {
+        Follow.updatePointerPosition(new FollowPosition(event.clientX, event.clientY), context)
+        Follow.animate(context)
+      })
+    }
 
     document.addEventListener('scroll', (): void => {
       Follow.updateScrollPosition(new FollowPosition(window.scrollX, window.scrollY), context)
       Follow.animate(context)
     })
-
-    if (this.options.mobile) {
-      window.addEventListener('deviceorientation', (event: DeviceOrientationEvent): void => {
-        Follow.updateMousePosition(new FollowPosition(event.gamma * 40, event.beta * 40), context)
-        Follow.animate(context)
-      })
-    }
   }
 
   /**
@@ -112,8 +132,8 @@ export default class Follow {
   private static animate (context: any): void {
     for (const element of context.elements) {
       const additional: FollowPosition = new FollowPosition(
-        Math.round((context.mouse.x + context.scroll.x - element.position.x) / element.factor),
-        Math.round((context.mouse.y + context.scroll.y - element.position.y) / element.factor)
+        Math.round((context.pointer.x + context.scroll.x - element.position.x) / element.factor),
+        Math.round((context.pointer.y + context.scroll.y - element.position.y) / element.factor)
       )
 
       // set the additional pixels as css transform translate
@@ -131,15 +151,15 @@ export default class Follow {
   }
 
   /**
-   * Update the correct current mouse position
+   * Update the correct current pointer position
    * @param {FollowPosition} position
    * @param context
    */
-  private static updateMousePosition (position: FollowPosition, context: any): void {
-    context.mouse.x = position.x
-    context.mouse.y = position.y
+  private static updatePointerPosition (position: FollowPosition, context: any): void {
+    context.pointer.x = position.x
+    context.pointer.y = position.y
 
-    FollowDebug.addDot(context.options, context.mouse)
+    FollowDebug.addDot(context.options, context.pointer)
   }
 
   /**
