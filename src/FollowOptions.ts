@@ -22,6 +22,12 @@ export default class FollowOptions {
   public initiate = true
 
   /**
+   * If the elements should follow on mobile with the gyro sensor
+   * @type {boolean}
+   */
+  public mobile = true
+
+  /**
    * If debug mode is activated with log messages and visual helpers
    * @type {boolean}
    */

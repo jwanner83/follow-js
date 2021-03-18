@@ -60,6 +60,13 @@ export default class Follow {
       Follow.updateScrollPosition(new FollowPosition(window.scrollX, window.scrollY), context)
       Follow.animate(context)
     })
+
+    if (this.options.mobile) {
+      window.addEventListener('deviceorientation', (event: DeviceOrientationEvent): void => {
+        Follow.updateMousePosition(new FollowPosition(event.gamma * 40, event.beta * 40), context)
+        Follow.animate(context)
+      })
+    }
   }
 
   /**
