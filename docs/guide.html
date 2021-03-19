@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Primary Meta Tags -->
     <title>Documentation - follow.js - Let elements follow your cursor with literally no effort.</title>
@@ -41,9 +42,11 @@
             </a>
             <div class="header">
                 <h1 class="header__title">follow<span class="header__inner">.js</span></h1>
-                <div class="header__version">v2.2.1</div>
+                <div class="header__version">v2.3.0</div>
             </div>
         </div>
+
+        <h1 class="navigation__title">Documentation</h1>
 
         <h1><a href="#getting-started">Getting started</a></h1>
         <h2><a href="#include-script">Include script</a></h2>
@@ -89,13 +92,6 @@
             import Follow from 'follow-js'
         </code>
 
-        <p>
-            ... with <a href="https://www.skypack.dev/view/follow-js">skypack.dev</a> ...
-        </p>
-
-        <code>
-            import Follow from 'https://cdn.skypack.dev/follow-js'
-        </code>
         <p>
             ... or download the <code>follow.min.js</code> file and include it in your html.
         </p>
@@ -144,10 +140,11 @@
 
         <code>
             const follow = new Follow({<br>
-            &emsp;&emsp;debug: true,<br>
             &emsp;&emsp;factor: 50,<br>
             &emsp;&emsp;attribute: 'follow',<br>
-            &emsp;&emsp;initiate: false<br>
+            &emsp;&emsp;initiate: false,<br>
+            &emsp;&emsp;mobile: false,<br>
+            &emsp;&emsp;debug: true<br>
             })
         </code>
 
@@ -161,18 +158,6 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td><p>debug</p></td>
-                <td>
-                    <p>
-                        Adds console log to the script and as well some visual helpers like the position of the mouse as
-                        well as the origin location of an object...
-                    </p>
-                </td>
-                <td>
-                    <code>false</code>
-                </td>
-            </tr>
             <tr>
                 <td><p>factor</p></td>
                 <td>
@@ -202,6 +187,29 @@
                 </td>
                 <td>
                     <code>true</code>
+                </td>
+            </tr>
+            <tr>
+                <td><p>mobile</p></td>
+                <td>
+                    <p>
+                        If the script should use the device orientation sensor on mobile.
+                    </p>
+                </td>
+                <td>
+                    <code>true</code>
+                </td>
+            </tr>
+            <tr>
+                <td><p>debug</p></td>
+                <td>
+                    <p>
+                        Adds console log to the script and as well some visual helpers like the position of the mouse as
+                        well as the origin location of an object...
+                    </p>
+                </td>
+                <td>
+                    <code>false</code>
                 </td>
             </tr>
             </tbody>
@@ -351,6 +359,12 @@
             </thead>
             <tbody>
             <tr>
+                <td><p>2.3.0</p></td>
+                <td>
+                    <p>Adding </p>
+                </td>
+            </tr>
+            <tr>
                 <td><p>2.2.1</p></td>
                 <td>
                     <p>Fixing es module support</p>
@@ -435,7 +449,7 @@
     </div>
 </main>
 
-<script src="https://unpkg.com/follow-js/dist/follow.min.js" data-follow-auto></script>
+<script src="../dist/follow.min.js" data-follow-auto></script>
 <script src="js/code.js"></script>
 </body>
 </html>

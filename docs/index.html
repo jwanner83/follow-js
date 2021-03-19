@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Primary Meta Tags -->
     <title>follow.js - Let elements follow your cursor with literally no effort.</title>
@@ -25,27 +26,29 @@
     <link rel="stylesheet" href="css/views/index.css" />
 </head>
 <body>
-<main class="heading" data-follow="50">
-    <h1 class="heading__title">
-        follow<span class="heading__title-inner">.js</span>
-    </h1>
-    <p class="heading__description">
-        Let elements follow your cursor with literally no effort.
-    </p>
-    <a class="btn btn--primary" href="guide.html">
-        Get Started
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill btn__icon" viewBox="0 0 16 16">
-            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
-        </svg>
-    </a>
-    <a class="btn btn--secondary" href="https://github.com/jwanner83/follow-js" target="_blank">
-        Github
-    </a>
-</main>
+<section class="container">
+    <main class="heading" data-follow="50">
+        <h1 class="heading__title">
+            follow<span class="heading__title-inner">.js</span>
+        </h1>
+        <p class="heading__description">
+            Let elements follow your cursor with literally no effort.
+        </p>
+        <a class="btn btn--primary" href="guide.html">
+            Get Started
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill btn__icon" viewBox="0 0 16 16">
+                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+            </svg>
+        </a>
+        <a class="btn btn--secondary" href="https://github.com/jwanner83/follow-js" target="_blank">
+            Github
+        </a>
+    </main>
 
-<div class="follow__background" data-follow="25"></div>
-<div class="follow__foreground" data-follow="8"></div>
+    <div class="follow__background" data-follow="25"></div>
+    <div class="follow__foreground" data-follow="8"></div>
+</section>
 
-<script src="https://unpkg.com/follow-js/dist/follow.min.js" data-follow-auto></script>
+<script src="../dist/follow.min.js" data-follow-auto></script>
 </body>
 </html>
