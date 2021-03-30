@@ -14,6 +14,13 @@ export default class FollowDebug {
   private static timeout = 5000
 
   /**
+   * The namespace which all elements added by the debug mode have
+   * @type {string}
+   * @private
+   */
+  private static namespace = 'follow-debug'
+
+  /**
    * Add a dot to the dom
    * @param options
    * @param {FollowPosition} position
@@ -32,6 +39,7 @@ export default class FollowDebug {
     dot.style.top = `${position.y}px`
     dot.style.background = color
     dot.style.borderRadius = '100%'
+    dot.setAttribute(this.namespace, '')
     document.body.append(dot)
 
     setTimeout((): void => {
@@ -57,6 +65,7 @@ export default class FollowDebug {
     copy.style.top = `${element.position.y - (element.target.offsetWidth / 2)}px`
     copy.style.border = '1px solid red'
     copy.style.background = 'none'
+    copy.setAttribute(this.namespace, '')
     document.body.append(copy)
   }
 
@@ -77,5 +86,14 @@ export default class FollowDebug {
     } else {
       console.log(message)
     }
+  }
+
+  /**
+   * Remove all elements which have been added by the debug mode
+   * @param {FollowOptions} options
+   */
+  public static removeAll (options: FollowOptions): void {
+    const elements: NodeListOf<HTMLElement> = document.querySelectorAll(`[${this.namespace}]`)
+    Array.from(elements).forEach(element => element.remove())
   }
 }

@@ -79,10 +79,6 @@ export default class Follow {
         this.updatePointerPosition(new FollowPosition(event.clientX, event.clientY))
         this.animate()
       })
-
-      window.addEventListener('blur', () => {
-        this.reset()
-      })
     }
 
     document.addEventListener('scroll', (): void => {
@@ -96,6 +92,9 @@ export default class Follow {
    * Remove all elements and set them to their normal position
    */
   public destroy (): void {
+    FollowDebug.removeAll(this.options)
+
+    this.reset()
     this.elements = new Array<FollowElement>()
 
     FollowDebug.addLog(this.options, 'follow.js instance is destroyed')
@@ -108,7 +107,7 @@ export default class Follow {
     this.destroy()
     this.initiate()
 
-    FollowDebug.addLog(this.options, 'follow.js instance is refreshed')
+    FollowDebug.addLog(this.options, 'follow.js instance has been refreshed')
   }
 
   /**
@@ -131,6 +130,8 @@ export default class Follow {
    * Reset all elements to their base position
    */
   public reset (): void {
+    FollowDebug.addLog(this.options, 'reset elements to base')
+
     for (const element of this.elements) {
       element.setTranslate(new FollowPosition(0, 0))
     }
