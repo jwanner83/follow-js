@@ -79,6 +79,10 @@ export default class Follow {
         this.updatePointerPosition(new FollowPosition(event.clientX, event.clientY))
         this.animate()
       })
+
+      window.addEventListener('blur', () => {
+        this.reset()
+      })
     }
 
     document.addEventListener('scroll', (): void => {
@@ -120,6 +124,15 @@ export default class Follow {
           this.options[property] = customOptions[property]
         }
       }
+    }
+  }
+
+  /**
+   * Reset all elements to their base position
+   */
+  public reset (): void {
+    for (const element of this.elements) {
+      element.setTranslate(new FollowPosition(0, 0))
     }
   }
 
