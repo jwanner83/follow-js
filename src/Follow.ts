@@ -55,8 +55,6 @@ export default class Follow {
 
     FollowDebug.addLog(this.options, `found ${targets.length} element(s) in the instance`)
 
-    const context = this
-
     if (this.options.mobile && /Mobi/.test(navigator.userAgent)) {
       window.addEventListener('deviceorientation', (event: DeviceOrientationEvent): void => {
         if (!this.mobileDifference) {
@@ -73,19 +71,19 @@ export default class Follow {
         const x: number = width / 2 + ((this.mobileDifference.x - event.gamma) * this.options.mobileFactor)
         const y: number = height / 2 + ((this.mobileDifference.y - event.beta) * this.options.mobileFactor)
 
-        Follow.updatePointerPosition(new FollowPosition(x , y), context)
-        Follow.animate(context)
+        this.updatePointerPosition(new FollowPosition(x , y))
+        this.animate()
       })
     } else {
       document.addEventListener('mousemove', (event: MouseEvent): void => {
-        Follow.updatePointerPosition(new FollowPosition(event.clientX, event.clientY), context)
-        Follow.animate(context)
+        this.updatePointerPosition(new FollowPosition(event.clientX, event.clientY))
+        this.animate()
       })
     }
 
     document.addEventListener('scroll', (): void => {
-      Follow.updateScrollPosition(new FollowPosition(window.scrollX, window.scrollY), context)
-      Follow.animate(context)
+      this.updateScrollPosition(new FollowPosition(window.scrollX, window.scrollY))
+      this.animate()
     })
   }
 
@@ -127,25 +125,24 @@ export default class Follow {
 
   /**
    * Animate the element
-   * @param context
    */
-  private static animate (context: any): void {
-    for (const element of context.elements) {
+  private animate (): void {
+    for (const element of this.elements) {
       const additional: FollowPosition = new FollowPosition(
-        Math.round((context.pointer.x + context.scroll.x - element.position.x) / element.factor),
-        Math.round((context.pointer.y + context.scroll.y - element.position.y) / element.factor)
+        Math.round((this.pointer.x + this.scroll.x - element.position.x) / element.factor),
+        Math.round((this.pointer.y + this.scroll.y - element.position.y) / element.factor)
       )
 
       // set the additional pixels as css transform translate
       element.setTranslate(additional)
 
-      if (context.options.debug) {
+      if (this.options.debug) {
         // prevent unnecessary calculations if debug mode is disabled
         const current: FollowPosition = new FollowPosition(
           element.position.x + additional.x,
           element.position.y + additional.y
         )
-        FollowDebug.addDot(context.options, current, 'red')
+        FollowDebug.addDot(this.options, current, 'red')
       }
     }
   }
@@ -153,25 +150,23 @@ export default class Follow {
   /**
    * Update the correct current pointer position
    * @param {FollowPosition} position
-   * @param context
    */
-  private static updatePointerPosition (position: FollowPosition, context: any): void {
-    context.pointer.x = position.x
-    context.pointer.y = position.y
+  private updatePointerPosition (position: FollowPosition): void {
+    this.pointer.x = position.x
+    this.pointer.y = position.y
 
-    FollowDebug.addDot(context.options, context.pointer)
+    FollowDebug.addDot(this.options, this.pointer)
   }
 
   /**
    * Update the correct current scroll position
    * @param {FollowPosition} position
-   * @param context
    */
-  private static updateScrollPosition (position: FollowPosition, context: any): void {
-    context.scroll.x = position.x
-    context.scroll.y = position.y
+  private updateScrollPosition (position: FollowPosition): void {
+    this.scroll.x = position.x
+    this.scroll.y = position.y
 
-    FollowDebug.addLog(context.options, `scroll event: x: ${context.scroll.x}, y: ${context.scroll.y}`)
+    FollowDebug.addLog(this.options, `scroll event: x: ${this.scroll.x}, y: ${this.scroll.y}`)
   }
 }
 
