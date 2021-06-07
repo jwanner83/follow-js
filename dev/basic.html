@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Development - Basic</title>
+
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        div {
+            height: 100px;
+            width: 100px;
+            background: black;
+            transition: 100ms all linear 0s;
+        }
+    </style>
+</head>
+<body>
+<div data-follow></div>
+
+<script src="follow.min.js"></script>
+<script>
+  const follow = new Follow({
+    debug: true
+  })
+</script>
+</body>
+</html>

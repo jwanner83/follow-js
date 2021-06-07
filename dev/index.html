@@ -6,30 +6,119 @@
 
     <style>
         html, body {
-            height: 100%;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             margin: 0;
+            background: #000;
         }
 
-        div {
-            height: 100px;
-            width: 100px;
-            background: black;
+        h1, h2, h3, h4, h5, h6, p, a {
+            font-family: "Century Gothic", sans-serif;
+            color: #FFF;
+        }
+
+        .container {
+            position: relative;
+            padding: 60px;
+            z-index: 1;
+        }
+
+        .header {
+            margin-top: 120px;
+            margin-bottom: 80px;
+        }
+
+        .header__title {
+            font-size: 45px;
+        }
+
+        .header__description {
+            font-size: 20px;
+            color: #D0D0D0;
+        }
+
+        .examples {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 60px;
+        }
+
+        .example {
+            cursor: pointer;
+            position: relative;
+            height: 180px;
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+
+        .example:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .example__iframe {
+            position: absolute;
+            transform: translate(-25%, -25%) scale(0.5);
+            height: 200%;
+            width: 200%;
+            background: white;
+            border: none;
+        }
+
+        .follow {
+            position: absolute;
             transition: 100ms all linear 0s;
+        }
+
+        .follow--1 {
+            top: -100px;
+            left: -150px;
+        }
+
+        .follow__item {
+            background: #AC0000;;
+            height: 500px;
+            width: 500px;
+            filter: blur(100px);
+            z-index: 1;
+            border-radius: 50px;
+            transform: rotate(50deg);
+            opacity: 0.5;
         }
     </style>
 </head>
 <body>
-<div data-follow></div>
+<div class="container">
+    <div class="header">
+        <h1 class="header__title">Development</h1>
+        <p class="header__description"><b>follow.js</b> is an experimental, dependency free script that lets elements follow your cursor without a huge overhead. Here you can find all the examples which help to develop this script and test the different behaviours.</p>
+    </div>
 
-<script src="follow.min.js"></script>
-<script>
-    const follow = new Follow({
-      debug: true
-    })
-</script>
+    <div class="examples">
+        <a class="example" href="basic.html">
+            <iframe class="example__iframe" src="basic.html" onclick="location = 'basic.html'"></iframe>
+        </a>
+        <a class="example" href="basic.html">
+            <iframe class="example__iframe" src="basic.html"></iframe>
+        </a>
+        <a class="example" href="basic.html">
+            <iframe class="example__iframe" src="basic.html"></iframe>
+        </a>
+        <a class="example" href="basic.html">
+            <iframe class="example__iframe" src="basic.html"></iframe>
+        </a>
+        <a class="example" href="basic.html">
+            <iframe class="example__iframe" src="basic.html"></iframe>
+        </a>
+        <a class="example" href="basic.html">
+            <iframe class="example__iframe" src="basic.html"></iframe>
+        </a>
+        <a class="example" href="basic.html">
+            <iframe class="example__iframe" src="basic.html"></iframe>
+        </a>
+    </div>
+</div>
+
+<div class="follow follow--1" data-follow="10">
+    <div class="follow__item"></div>
+</div>
 </body>
 </html>

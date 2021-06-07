@@ -9,11 +9,6 @@ You can do this through [npm](https://www.npmjs.com/package/follow-js) `npm i -s
 ````js
 import Follow from 'follow-js'
 ````
-... with [skypack.dev](https://www.skypack.dev/view/follow-js) ... 
-````js 
-import Follow from 'https://cdn.skypack.dev/follow-js'
-````
-
 ... or download the `follow.min.js` file and include it in your html.
 
 ````html
