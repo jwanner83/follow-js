@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "declarationDir": "dts"
+  },
+  "include": ["src/**/*.d.ts", "src/**/*.ts"]
+}
