@@ -1,3 +1,7 @@
+> [!CAUTION]
+> This repository is no longer actively maintained. While it remains available for use, please be aware that it may not
+> receive updates or support in the future.
+
 # follow.js
 
 **follow.js** is an experimental, dependency free script that lets elements follow your cursor without a huge overhead.
@@ -23,6 +27,7 @@ import Follow from "https://cdn.skypack.dev/follow-js";
 ... or download the `follow.min.js` file and include it in your html.
 
 ```html
+
 <script src="follow.min.js"></script>
 ```
 
@@ -34,6 +39,7 @@ To create an element which follows the cursor, you now have to add the `data-fol
 the attribute can be changed through the options) to any tag you want.
 
 ```html
+
 <div data-follow>...</div>
 ```
 
@@ -43,6 +49,7 @@ After you included the script in your application, you have to initialize follow
 automatically, if you included it via script tag and add the <code>data-follow-auto</code> attribute to it
 
 ```html
+
 <script src="follow.min.js" data-follow-auto></script>
 ```
 
@@ -69,7 +76,7 @@ const follow = new Follow({
 ### Available options
 
 | Option    | Description                                                                                                                                                                                               | Default Value |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
 | debug     | Adds console log to the script and as well some visual helpers like the position of the mouse as well as the origin location of an object...                                                              | `false`       |
 | factor    | The default factor of elements who doesn't define it explicitly with an own factor                                                                                                                        | `10`          |
 | attribute | The attribute which is used to get all elements which should follow the cursor.                                                                                                                           | `data-follow` |
@@ -87,7 +94,7 @@ const follow = new Follow() < br > follow.destroy();
 ### Available methods
 
 | Method     | Description                                                                                    |
-| ---------- | ---------------------------------------------------------------------------------------------- |
+|------------|------------------------------------------------------------------------------------------------|
 | `initiate` | Initiate the script, get all elements which will follow the cursor and start following.        |
 | `destroy`  | Stop all following and calculating.                                                            |
 | `refresh`  | Restart the instance. This method first calls the `destroy` and after that the `start` method. |
@@ -99,11 +106,13 @@ an issue with the link to the project and a short description.
 
 ## Links
 
-follow.js is open source. You can find the source code on [Github](https://github.com/jwanner83/follow-js), and the distributed version on [npm](https://www.npmjs.com/package/follow-js).
+follow.js is open source. You can find the source code on [Github](https://github.com/jwanner83/follow-js), and the
+distributed version on [npm](https://www.npmjs.com/package/follow-js).
 
 ## Issues / Questions
 
-If you have any issues or questions with the script, you can [open an issue on Github](https://github.com/jwanner83/follow-js/issues/new).
+If you have any issues or questions with the script, you
+can [open an issue on Github](https://github.com/jwanner83/follow-js/issues/new).
 
 ## Contributions
 
@@ -114,7 +123,7 @@ the development branch. We'll then have a look at the code and give you feedback
 ## Version history
 
 | Version | Description                                                                                                                                                |
-| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 2.3.0   | Include types in distributed es version                                                                                                                    |
 | 2.2.1   | Fixing es module support                                                                                                                                   |
 | 2.2.0   | - Adding debug mode to script<br>- Change initialization with options<br>- Rename FollowDefaults to FollowOptions<br>- Fixing error with multiple elements |
